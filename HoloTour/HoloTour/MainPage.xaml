@@ -5,10 +5,13 @@
              x:Class="HoloTour.MainPage">
   <StackLayout VerticalOptions="StartAndExpand" Padding="30">
     <Label Text="Welcome to Holo Tour!" VerticalOptions="Center" HorizontalOptions="Center" />
-    <maps:Map WidthRequest="320" HeightRequest="200"
+    <maps:Map
+       WidthRequest="320" 
+       HeightRequest="400"
         x:Name="MyMap"
         IsShowingUser="true"
         MapType="Hybrid"
-        />
+        HorizontalOptions="FillAndExpand"
+      VerticalOptions="EndAndExpand"/>
   </StackLayout>
 </ContentPage>
