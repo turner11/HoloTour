@@ -6,12 +6,16 @@
   <StackLayout VerticalOptions="StartAndExpand" Padding="30">
     <Label Text="Welcome to Holo Tour!" VerticalOptions="Center" HorizontalOptions="Center" />
     <maps:Map
-       WidthRequest="320" 
+       WidthRequest="320"
        HeightRequest="400"
-        x:Name="MyMap"
+        x:Name="MapView"
         IsShowingUser="true"
         MapType="Hybrid"
         HorizontalOptions="FillAndExpand"
       VerticalOptions="EndAndExpand"/>
+    <Picker x:Name="pckMapType"
+            HorizontalOptions="FillAndExpand" SelectedIndexChanged="PckMapType_SelectedIndexChanged" >
+    </Picker>
+    <Button Text="Go To current Location" Clicked="BtnGoLocation_Clicked" x:Name="btnGoLocation" HorizontalOptions="FillAndExpand"/>
   </StackLayout>
 </ContentPage>
