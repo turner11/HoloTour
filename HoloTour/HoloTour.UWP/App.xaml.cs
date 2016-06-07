@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace HoloTour.UWP
 {
+    const string BING_MAPS_AUTHORIZATION_TOKEN = "gqQhqffcNwF0tX0jnJxF~4mj3rYIT_l_iqUh4nBgCow~AnvutSn4JaqUKe5AqqywQtKQwTFrdzxDVu32fGV9KANKfxQ3K2jVsGMo5R1dRxp9";
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -59,6 +60,7 @@ namespace HoloTour.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
+                FormsMaps.Init(BING_MAPS_AUTHORIZATION_TOKEN) ;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
