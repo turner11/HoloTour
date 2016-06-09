@@ -31,7 +31,7 @@ namespace HoloTour
 
            
         }
-
+        
         private async void BtnGoLocation_Clicked(object sender, EventArgs e)
         {
             var mapPos = await GetCurrentPosition();
@@ -78,45 +78,7 @@ namespace HoloTour
                 this.MapView.MapType = mType;
             }
         }
-
-        //this.MapView.DidUpdateUserLocation += (sender, e) => {
-        //    if (mapView.UserLocation != null)
-        //    {
-        //        CLLocationCoordinate2D coords = mapView.UserLocation.Coordinate;
-        //        MKCoordinateSpan span = new MKCoordinateSpan(MilesToLatitudeDegrees(2), MilesToLongitudeDegrees(2, coords.Latitude));
-        //        mapView.Region = new MKCoordinateRegion(coords, span);
-        //    }
-        //};
-
-
-
-
-        //private async void GoToMyLocation()
-        //{
-
-        //    CLLocationManager locationManager = new CLLocationManager();
-        //    locationManager.RequestWhenInUseAuthorization();
-        //    mapView.ShowsUserLocation = true;
-
-        //Geolocator geo = new Geolocator();
-        //double lat = 0, longt = 0;
-
-        //Task getPosition = Task.Run(async () =>
-        //{
-        //    try
-        //    {
-        //        Geoposition pos = await geo.GetGeopositionAsync();
-        //        lat = pos.Coordinate.Point.Position.Latitude;
-        //        longt = pos.Coordinate.Point.Position.Longitude;
-        //    }
-        //    catch (Exception exp)
-        //    {
-        //        Debug.WriteLine(exp);
-        //    }
-
-        //});
-        //getPosition.Wait();
-
+        
 
         private async void DelayedZoomIn()
         {
