@@ -18,6 +18,7 @@ namespace HoloTour.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
+
             LoadApplication(new App());
         }
     }
