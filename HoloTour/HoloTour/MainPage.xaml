@@ -3,16 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="HoloTour.MainPage">
-  <StackLayout VerticalOptions="StartAndExpand" Padding="30">
+  <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+      Padding="30" >
     <Label Text="Welcome to Holo Tour!" VerticalOptions="Center" HorizontalOptions="Center" />
+
+   
     <maps:Map
-       WidthRequest="320"
-       HeightRequest="400"
+        WidthRequest="100"
+       HeightRequest="100"
         x:Name="MapView"
         IsShowingUser="true"
         MapType="Hybrid"
         HorizontalOptions="FillAndExpand"
-      VerticalOptions="EndAndExpand"/>
+      VerticalOptions="FillAndExpand"/>
     <Picker x:Name="pckMapType"
             HorizontalOptions="FillAndExpand" SelectedIndexChanged="PckMapType_SelectedIndexChanged" >
     </Picker>
