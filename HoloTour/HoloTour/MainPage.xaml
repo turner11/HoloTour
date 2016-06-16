@@ -4,7 +4,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="HoloTour.MainPage">
   <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-      Padding="30" >
+      Padding="0" >
     <Label Text="Welcome to Holo Tour!" VerticalOptions="Center" HorizontalOptions="Center" />
 
    
