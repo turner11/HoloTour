@@ -3,22 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="HoloTour.MainPage">
-  <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-      Padding="30" >
-    <Label Text="Welcome to Holo Tour!" VerticalOptions="Center" HorizontalOptions="Center" />
 
-   
+  <StackLayout VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"
+               Padding="30" >
+
+    <Label Text="Welcome to Holo Tour!"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+
+    <Entry  x:Name ="txtLocation"           
+            Placeholder="Current location"
+            HorizontalTextAlignment = "Center"
+            IsEnabled="false"/>
+
     <maps:Map
-        WidthRequest="100"
-       HeightRequest="100"
-        x:Name="MapView"
+          WidthRequest="100"
+          HeightRequest="100"
+          x:Name="MapView"
         IsShowingUser="true"
         MapType="Hybrid"
         HorizontalOptions="FillAndExpand"
       VerticalOptions="FillAndExpand"/>
+
     <Picker x:Name="pckMapType"
-            HorizontalOptions="FillAndExpand" SelectedIndexChanged="PckMapType_SelectedIndexChanged" >
+            HorizontalOptions="FillAndExpand"
+            SelectedIndexChanged="PckMapType_SelectedIndexChanged" >
     </Picker>
-    <Button Text="Go To current Location" Clicked="BtnGoLocation_Clicked" x:Name="btnGoLocation" HorizontalOptions="FillAndExpand"/>
+
+    <Button Text="Go To current Location"
+            Clicked="BtnGoLocation_Clicked"
+            x:Name="btnGoLocation"
+            HorizontalOptions="FillAndExpand"/>
   </StackLayout>
 </ContentPage>
