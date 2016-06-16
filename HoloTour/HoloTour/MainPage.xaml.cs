@@ -27,17 +27,23 @@ namespace HoloTour
             this.pckMapType.SelectedIndex = this.pckMapType.Items.IndexOf(this.MapView.MapType.ToString());
             
             this.DelayedZoomIn();
-
-
            
         }
-        
         private async void BtnGoLocation_Clicked(object sender, EventArgs e)
         {
             var mapPos = await GetCurrentPosition();
             if (mapPos.HasValue)
             {
-                var region = MapSpan.FromCenterAndRadius(mapPos.Value, Distance.FromMiles(0.3));
+                var pos = mapPos.Value;
+                var region = MapSpan.FromCenterAndRadius(pos, Distance.FromMiles(0.3));
+                
+
+              
+                
+                this.txtLocation.Text = String.Format("{0} , {1}", pos.Latitude, pos.Longitude);
+                this.txtLocation.IsEnabled = true;
+                this.txtLocation.Keyboard = Keyboard.Numeric;
+
                 this.MapView.MoveToRegion(region);
             }
             
@@ -78,7 +84,6 @@ namespace HoloTour
                 this.MapView.MapType = mType;
             }
         }
-        
 
         private async void DelayedZoomIn()
         {
