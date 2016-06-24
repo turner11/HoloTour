@@ -26,6 +26,7 @@ namespace HoloTour.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::ModernHttpClient.Resource.String.library_name = global::HoloTour.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::HoloTour.Droid.Resource.Attribute.actionBarSize;
 		}
 		
@@ -3219,6 +3220,12 @@ namespace HoloTour.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f060046
+			public const int ApplicationName = 2131099718;
+			
+			// aapt resource value: 0x7f060045
+			public const int Hello = 2131099717;
+			
 			// aapt resource value: 0x7f06002e
 			public const int abc_action_bar_home_description = 2131099694;
 			
@@ -3377,6 +3384,9 @@ namespace HoloTour.Droid
 			
 			// aapt resource value: 0x7f06001e
 			public const int common_signin_button_text_long = 2131099678;
+			
+			// aapt resource value: 0x7f060047
+			public const int library_name = 2131099719;
 			
 			// aapt resource value: 0x7f06001f
 			public const int mr_button_content_description = 2131099679;

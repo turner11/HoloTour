@@ -3,7 +3,10 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Xam.Plugin.Geolocator": "3.0.4",
     "Xamarin.Forms": "2.0.0.6482",
-    "Xamarin.Forms.Maps": "2.2.0.45"
+    "Xamarin.Forms.Maps": "2.2.0.45",
+    "Xamarin.Forms.Pages": "2.3.0.48-pre3",
+    "Xamarin.Forms.Theme.Base": "1.0.0.43-pre1",
+    "Xamarin.Forms.Theme.Light": "1.0.0.43-pre1"
   },
   "frameworks": {
     "uap10.0": {}
