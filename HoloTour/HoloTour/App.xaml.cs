@@ -13,7 +13,7 @@ namespace HoloTour
         public App()
         {
             InitializeComponent();
-            MainPage = new HoloTour.MainPage();
+            MainPage = new HoloTour.Pages.MainPage();
         }
 
         protected override void OnStart()

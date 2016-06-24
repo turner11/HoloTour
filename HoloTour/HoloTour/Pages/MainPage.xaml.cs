@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
-namespace HoloTour
+namespace HoloTour.Pages
 {
     public partial class MainPage : ContentPage
     {
