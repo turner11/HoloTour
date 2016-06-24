@@ -34,8 +34,12 @@ namespace HoloTour.Pages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await Task.Run(() => this.DelayedZoomIn(TimeSpan.FromSeconds(5))).ConfigureAwait(true);
+            await this.DelayedZoomIn(TimeSpan.FromSeconds(5)).ConfigureAwait(true);
+
+            await Task.Delay(TimeSpan.FromSeconds(6));
+            
             this.MapView.IsShowingUser = true;
+            await this.DelayedZoomIn(TimeSpan.FromSeconds(0));
         }
         private async void BtnGoLocation_Clicked(object sender, EventArgs e)
         {
@@ -93,12 +97,12 @@ namespace HoloTour.Pages
             }
         }
 
-        private void DelayedZoomIn(TimeSpan delay)
+        private async Task DelayedZoomIn(TimeSpan delay)
         {
             
-           Task.Delay(delay);
+           await Task.Delay(delay);
           
-            var position = GetCurrentPosition().Result;
+           var position = await GetCurrentPosition();
             if (position.HasValue)
             {
                 var region = MapSpan.FromCenterAndRadius(position.Value, Distance.FromMiles(0.3));
