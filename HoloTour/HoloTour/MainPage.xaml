@@ -21,7 +21,6 @@
           WidthRequest="100"
           HeightRequest="100"
           x:Name="MapView"
-        IsShowingUser="true"
         MapType="Hybrid"
         HorizontalOptions="FillAndExpand"
       VerticalOptions="FillAndExpand"/>

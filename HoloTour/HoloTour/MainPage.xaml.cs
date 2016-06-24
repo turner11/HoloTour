@@ -25,9 +25,17 @@ namespace HoloTour
 
             }
             this.pckMapType.SelectedIndex = this.pckMapType.Items.IndexOf(this.MapView.MapType.ToString());
+
+
             
-            this.DelayedZoomIn();
            
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await Task.Run(() => this.DelayedZoomIn(TimeSpan.FromSeconds(5))).ConfigureAwait(true);
+            this.MapView.IsShowingUser = true;
         }
         private async void BtnGoLocation_Clicked(object sender, EventArgs e)
         {
@@ -57,7 +65,7 @@ namespace HoloTour
                 var locator = CrossGeolocator.Current;
                 locator.DesiredAccuracy = 50;
 
-                var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
+                var position = await locator.GetPositionAsync(timeoutMilliseconds: 15000);
 
                 Debug.WriteLine("Position Status: {0}", position.Timestamp);
                 Debug.WriteLine("Position Latitude: {0}", position.Latitude);
@@ -85,17 +93,12 @@ namespace HoloTour
             }
         }
 
-        private async void DelayedZoomIn()
+        private void DelayedZoomIn(TimeSpan delay)
         {
             
-            await Task.Run(async () =>
-            {
-                await Task.Delay(5000);
-                
-                
-            }).ConfigureAwait(true);
-
-            var position = await GetCurrentPosition();
+           Task.Delay(delay);
+          
+            var position = GetCurrentPosition().Result;
             if (position.HasValue)
             {
                 var region = MapSpan.FromCenterAndRadius(position.Value, Distance.FromMiles(0.3));
