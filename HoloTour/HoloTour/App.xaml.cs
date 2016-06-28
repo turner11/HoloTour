@@ -13,11 +13,14 @@ namespace HoloTour
         public App()
         {
             InitializeComponent();
-            MainPage = new HoloTour.Pages.MainPage();
+            //MainPage = new HoloTour.Pages.MainPage();
+            var sessionPage = new HoloTour.Pages.SessionDataPage();
+            MainPage = new NavigationPage(sessionPage);
         }
 
         protected override void OnStart()
         {
+            //new Xamarin.Forms.Pages.ListDataPage().StyleId = 
             // Handle when your app starts
         }
 
