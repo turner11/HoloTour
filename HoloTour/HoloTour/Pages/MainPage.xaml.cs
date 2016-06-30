@@ -27,8 +27,9 @@ namespace HoloTour.Pages
             this.pckMapType.SelectedIndex = this.pckMapType.Items.IndexOf(this.MapView.MapType.ToString());
 
 
-            
-           
+
+         
+
         }
 
         protected async override void OnAppearing()
@@ -77,6 +78,9 @@ namespace HoloTour.Pages
 
                 mapPos = new Position(position.Latitude, position.Longitude);
 
+                //bool success = await Plugin.Geolocator.CrossGeolocator.Current.StartListeningAsync().ConfigureAwait(false);
+
+                //bool success = await Plugin.Geolocator.CrossGeolocator.Current.StopListeningAsync().ConfigureAwait(false);
 
             }
             catch (Exception ex)
