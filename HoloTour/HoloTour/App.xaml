@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:mytheme="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Light"
              x:Class="HoloTour.App">
-  <Application.Resources>
+  <!--<Application.Resources>
     <ResourceDictionary MergedWith="mytheme:LightThemeResources">
     </ResourceDictionary>
-  </Application.Resources>
+  </Application.Resources>-->
 </Application>

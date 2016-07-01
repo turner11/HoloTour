@@ -14,8 +14,13 @@ namespace HoloTour
         {
             InitializeComponent();
             //MainPage = new HoloTour.Pages.MainPage();
-            var sessionPage = new HoloTour.Pages.SessionDataPage();
-            MainPage = new NavigationPage(sessionPage);
+            //var sessionPage = new HoloTour.Pages.SessionDataPage();
+            //var navPage = new NavigationPage(sessionPage); 
+
+            //MainPage = new Pages.MasterDetailsTour();
+
+            var toursPae = new Pages.ToursPage();
+            MainPage = new NavigationPage(toursPae);
         }
 
         protected override void OnStart()
