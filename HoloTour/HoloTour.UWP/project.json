@@ -1,10 +1,11 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Newtonsoft.Json": "9.0.1",
     "Xam.Plugin.Geolocator": "3.0.4",
-    "Xamarin.Forms": "2.0.0.6482",
-    "Xamarin.Forms.Maps": "2.2.0.45",
-    "Xamarin.Forms.Pages": "2.3.0.48-pre3",
+    "Xamarin.Forms": "2.3.1.110-pre1",
+    "Xamarin.Forms.Maps": "2.3.0.107",
+    "Xamarin.Forms.Pages": "2.3.1.110-pre1",
     "Xamarin.Forms.Theme.Base": "1.0.0.43-pre1",
     "Xamarin.Forms.Theme.Light": "1.0.0.43-pre1"
   },
