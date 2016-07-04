@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace HoloTour.Models
 {
-    class TourModel
+    public class TourModel
     {
         public string Name { get; internal set; }
         public DateTime Created { get { return DateTime.Today; } }

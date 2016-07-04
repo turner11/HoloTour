@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HoloTour.Models
 {
-    class PointOfInterestModel
+    public class PointOfInterestModel
     {
         
         public int Id { get; }

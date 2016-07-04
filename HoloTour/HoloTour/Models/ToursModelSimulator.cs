@@ -20,10 +20,10 @@ namespace HoloTour.Models
             return new List<TourModel>()
             {
                 new TourModel(JerusalemPointsOfInterests) {Name ="Jerusalem"},
-                new TourModel(null) {Name ="Dead Sea"},
-                new TourModel(null) {Name ="New York"},
-                new TourModel(null) {Name ="Paris"},
-                new TourModel(null) {Name ="Prague"},
+                new TourModel(JerusalemPointsOfInterests) {Name ="Dead Sea"},
+                new TourModel(JerusalemPointsOfInterests) {Name ="New York"},
+                new TourModel(JerusalemPointsOfInterests) {Name ="Paris"},
+                new TourModel(JerusalemPointsOfInterests) {Name ="Prague"},
             };
 
         }
@@ -33,9 +33,9 @@ namespace HoloTour.Models
         {
             var JerusalemPointsOfInterests = new List<PointOfInterestModel>()
             {
-                new PointOfInterestModel(JsonFactory(id:1,title:"Tower of David",position:new Position(31.776663, 35.228402),imageBytes:null)),
-                new PointOfInterestModel(JsonFactory(id:2,title:"Menachem Begin Heritage Center",position:new Position(31.769718, 35.225422),imageBytes:null)),
-                new PointOfInterestModel(JsonFactory(id:2,title:"Shuk Mahane Yehuda",position:new Position(31.786871, 35.212321),imageBytes:null))
+                new PointOfInterestModel(JsonFactory(position:new Position(35.228402,31.776663),imageBytes:null,id:1,title:"Tower of David" )),
+                new PointOfInterestModel(JsonFactory(position:new Position(35.225422,31.769718),imageBytes:null,id:2,title:"Menachem Begin Heritage Center")),
+                new PointOfInterestModel(JsonFactory(position:new Position(35.212321,31.786871), imageBytes:null,id:2,title:"Shuk Mahane Yehuda"))
             };
 
             return JerusalemPointsOfInterests;

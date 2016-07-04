@@ -109,7 +109,8 @@ namespace HoloTour.Pages
             var selectedTour = e.SelectedItem as TourModel;
             if (selectedTour != null)
             {
-                Navigation.PushAsync(new  MainPage());
+                //Navigation.PushAsync(new  MainPage());
+                Navigation.PushAsync(new TourPage(selectedTour));
                 //App.Current.MainPage = new MainPage();
             }
         }
