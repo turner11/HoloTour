@@ -59,7 +59,7 @@ namespace HoloTour.Pages
             // (Argument of DataTemplate constructor is called for 
             //      each item; it must return a Cell derivative.)
 
-            var dummyTour = new TourModel();
+            var dummyTour = new TourModel(null);
            var tmplate = new DataTemplate(() =>
             {
                 // Create views with bindings for displaying each property.
@@ -109,7 +109,8 @@ namespace HoloTour.Pages
             var selectedTour = e.SelectedItem as TourModel;
             if (selectedTour != null)
             {
-                App.Current.MainPage = new MainPage();
+                Navigation.PushAsync(new  MainPage());
+                //App.Current.MainPage = new MainPage();
             }
         }
     }

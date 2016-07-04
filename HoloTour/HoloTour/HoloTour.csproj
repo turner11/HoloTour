@@ -39,7 +39,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common.cs" />
+    <Compile Include="Models\Guide.cs" />
+    <Compile Include="Models\PointOfInterestModel.cs" />
     <Compile Include="Models\TourModel.cs" />
+    <Compile Include="Models\ToursModelSimulator.cs" />
     <Compile Include="Models\ToursModel.cs" />
     <Compile Include="Pages\ToursPage.xaml.cs">
       <DependentUpon>ToursPage.xaml</DependentUpon>
