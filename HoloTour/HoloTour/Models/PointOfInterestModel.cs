@@ -47,7 +47,8 @@ Path 'Position', line 4, position 15.
 
             var bObjs = jsonObject.GetValue("imageBytes").ToArray();
             var imageBytes = bObjs.Cast<JValue>().Where(obj => obj.Value is byte).Select(obj => (byte)obj.Value).ToArray();
-          
+
+            this.Guide = new Guide();
         }
     }
 }

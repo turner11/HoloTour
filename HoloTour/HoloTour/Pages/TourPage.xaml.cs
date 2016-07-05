@@ -19,6 +19,8 @@ namespace HoloTour.Pages
 
             this.lblLocation.IsVisible = false;
             this.Appearing += TourPage_Appearing;
+
+            
         }
 
         private void TourPage_Appearing(object sender, EventArgs e)
@@ -49,7 +51,10 @@ namespace HoloTour.Pages
             if (pin == null)
                 return;
 
-            this.lblLocation.Text = pin.Label;
+            var poi = this._model.PointOfInterest.Where(p => p.Position == pin.Position).FirstOrDefault();
+                
+            var textToDisplay = poi.Guide.Text;
+            this.lblLocation.Text = pin.Label + ": "+textToDisplay;
             this.lblLocation.IsVisible = true;
 
             await Task.Delay(3000).ContinueWith((t) =>
