@@ -17,6 +17,10 @@ namespace HoloTour.Pages
             InitializeComponent();
             this._model = model;
 
+            //add all points of interest to route
+            this.MapView.RouteCoordinates.AddRange(this._model.PointOfInterest.Select(poi=> poi.Position));
+            
+
             this.lblLocation.IsVisible = false;
             this.Appearing += TourPage_Appearing;
 
@@ -35,8 +39,8 @@ namespace HoloTour.Pages
                                                                     }).ToArray();
 
             
-            var firstPin = pins.First();
-            var region = MapSpan.FromCenterAndRadius(firstPin.Position, Distance.FromKilometers(0.5));
+            var mapLocatoion = this.MapView.RouteCoordinates.FirstOrDefault();
+            var region = MapSpan.FromCenterAndRadius(mapLocatoion, Distance.FromKilometers(1));
             this.MapView.MoveToRegion(region);
             foreach (var pin in pins)
             {
