@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.Maps;
@@ -33,7 +34,7 @@ namespace HoloTour.Models
         public string Text { get { return "This is a lovely place!"; } }
 
 
-        public Guide(string json)
+        public Guide(JObject json)
         {
 
         }

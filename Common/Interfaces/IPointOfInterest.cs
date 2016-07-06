@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HoloTour
+namespace HoloTour.DataAcesss.Interfaces
 {
-    class ContentService
+    public interface IPointOfInterest: IIdAndTitleObject
     {
     }
 }

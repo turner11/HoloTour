@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using HoloTour.ContentLogics;
+using HoloTour.DataAcesss.Interfaces;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,22 @@ using System.Threading.Tasks;
 
 namespace HoloTour.Models
 {
-    public class PointOfInterestModel
+    public class PointOfInterestModel: IPointOfInterest
     {
-        
+        readonly ContentService _contentService;
+        /// <summary>
+        /// Gets the ID of this instance.
+        /// </summary>
+        /// <value>
+        /// The ID of this instance.
+        /// </value>
         public int Id { get; }
+        /// <summary>
+        /// Gets the Title of this instance.
+        /// </summary>
+        /// <value>
+        /// The ID of Title instance.
+        /// </value>
         public string Title { get; }
         public Xamarin.Forms.Maps.Position Position { get; }
 
@@ -22,6 +36,7 @@ namespace HoloTour.Models
         public PointOfInterestModel(string jsonString)
         {
 
+            this._contentService = ContentService.Factory();
             /*
              * Cannot deserialize the current JSON array (e.g. [1,2,3]) into type 'Xamarin.Forms.Maps.Position' 
              * because the type requires a JSON object (e.g. {"name":"value"}) to deserialize correctly.
@@ -53,8 +68,8 @@ Path 'Position', line 4, position 15.
 
         internal void Initialize()
         {
-            string json = ContentService.GetGuideByPoiId(this.Id); 
-            this.Guide = new Guide(json);
+            var guide= this._contentService.GetPoiGuide(this);
+            this.Guide = guide;
         }
 
         

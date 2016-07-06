@@ -11,10 +11,13 @@ namespace HoloTour.Pages
 {
     public partial class ToursPage : ContentPage
     {
+        ContentLogics.ContentService _contentService;
         private readonly ListView _lstTours;
 
         public ToursPage()
         {
+            this._contentService = ContentLogics.ContentService.Factory();
+
             InitializeComponent();
             this._lstTours = this.GetBindedList();
 
@@ -46,7 +49,7 @@ namespace HoloTour.Pages
         {
             var lst = new ListView();
             lst.ItemTemplate = this.GetListTemplate();
-            var tours = ToursModel.GetTours();
+            var tours = this._contentService.GetTours();
             lst.ItemsSource = tours;
 
             return lst;
@@ -59,7 +62,7 @@ namespace HoloTour.Pages
             // (Argument of DataTemplate constructor is called for 
             //      each item; it must return a Cell derivative.)
 
-            var dummyTour = new TourModel(null);
+            var dummyTour = new TourModel("dummy",null);
            var tmplate = new DataTemplate(() =>
             {
                 // Create views with bindings for displaying each property.
@@ -109,6 +112,7 @@ namespace HoloTour.Pages
             var selectedTour = e.SelectedItem as TourModel;
             if (selectedTour != null)
             {
+                selectedTour.Initialize();
                 //Navigation.PushAsync(new  MainPage());
                 Navigation.PushAsync(new TourPage(selectedTour));
                 //App.Current.MainPage = new MainPage();

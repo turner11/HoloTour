@@ -10,16 +10,27 @@ namespace HoloTour.Models
 {
     public class TourModel
     {
-        public string Name { get; internal set; }
+        public string Name { get;  }
         public DateTime Created { get { return DateTime.Today; } }
 
         public Color Color { get { return Color.Purple; } }
 
         public ReadOnlyCollection<PointOfInterestModel> PointOfInterest { get; }
-        public TourModel(IEnumerable<PointOfInterestModel> pointsOfInterest)
+        public TourModel(string name, IEnumerable<PointOfInterestModel> pointsOfInterest)
         {
+            this.Name = name;
             pointsOfInterest = pointsOfInterest ?? new List<PointOfInterestModel>();
             this.PointOfInterest = new ReadOnlyCollection<PointOfInterestModel>(pointsOfInterest.ToList());
+        }
+
+        
+
+        public void Initialize()
+        {
+            foreach (var poi in this.PointOfInterest)
+            {
+                poi.Initialize();
+            }
         }
     }
 }
