@@ -20,6 +20,11 @@ namespace HoloTour.Models
             
             this.Tours = new ReadOnlyCollection<TourModel>(this._contentService.GetTours().ToList());
         }
-       
+
+        public override string ToString()
+        {
+            return $"Tours model: {this.Tours.Count} Tours";
+        }
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿using HoloTour.DataAcesss;
-using HoloTour.DataAcesss.Interfaces;
+using HoloTour.Common.Interfaces;
 using HoloTour.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -27,8 +27,19 @@ namespace HoloTour.ContentLogics
 
         public Guide GetPoiGuide(IPointOfInterest pointofInterest)
         {
-            JObject guideJson= this._dataCollector.GetPoiGuide(pointofInterest);
-            return new Guide(guideJson);
+           var str = @"
+The Tower of David
+​The Tower of David Museum in Jerusalem is one site that no visitor should miss. This amazing museum offers you the opportunity to experience captivating exhibits that will deepen your understanding of the Holy City. But, even more, its very stones are part of this city’s living history.";
+
+
+           var a=  JObject.FromObject(
+                new Guide(pointofInterest, str)
+                );
+           
+            JObject guideJson = this._dataCollector.GetPoiGuide(pointofInterest);
+
+            var jObject = this._dataCollector.GetPoiGuide(pointofInterest);
+            return new Guide( jObject);
 
         }
 
@@ -39,10 +50,10 @@ namespace HoloTour.ContentLogics
             foreach (var tJson in toursJsons)
             {
                 
-                var name = tJson["Name"].Value<string>();
-                var poisJson = tJson["pois"].Values();
-                var pois = poisJson.Select(json => new PointOfInterestModel(json.ToString())).ToList();
-                var tour = new TourModel(name,pois);
+                //var name = tJson["Name"].Value<string>();
+                //var poisJson = tJson["PointsOfInterest"];
+                //var pois = poisJson.Select(json => new PointOfInterestModel(json as JObject)).ToList();
+                var tour = new TourModel(tJson);
                 ret.Add(tour);
             }
 

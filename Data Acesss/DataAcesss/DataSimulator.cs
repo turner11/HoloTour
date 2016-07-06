@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Xamarin.Forms.Maps;
 using System.Diagnostics;
-using HoloTour.DataAcesss.Interfaces;
+using HoloTour.Common.Interfaces;
 
 namespace HoloTour.DataAcesss
 {
@@ -14,29 +14,29 @@ namespace HoloTour.DataAcesss
     {
         public override List<JObject> GetTours()
         {
-            Debug.Assert(false,"Implement!");
-            //TODO: THe parsing should be done in logics level. This layer should return the JSON.
-            //In order to do that, collect all pois in single Json + the name of tour.
+            
+            var JerusalemPointsOfInterestsJSON = GetJerusalemPointsOfInterest().ToArray();
+            
+            var simulatedLocations = new List<string>
+            {
+                "Jerusalem",
+                "Dead Sea" ,
+                "New York" ,
+                "Paris"    ,
+                "Prague"   ,
+            };
 
-            var JerusalemPointsOfInterestsJSON = GetJerusalemPointsOfInterest();
-            return JerusalemPointsOfInterestsJSON.ToList();
-            //var jPos = JerusalemPointsOfInterestsJSON.Select(jObj => new PointOfInterestModel( jObj.ToString().Trim())).ToList();
+            var ret = new List<JObject>();
 
-            //var simulatedLocations = new List<string>
-            //{
-            //    "Jerusalem",
-            //    "Dead Sea" ,
-            //    "New York" ,
-            //    "Paris"    ,
-            //    "Prague"   ,
-            //};
-
-            //var ret = new List<TourModel>();
-            //foreach (var tourname in simulatedLocations)
-            //{
-            //    ret.Add(new TourModel( tourname,jPos));
-            //}
-            //return ret;
+            foreach (var location in simulatedLocations)
+            {
+                var anObj = new { Name = location, PointsOfInterest = JerusalemPointsOfInterestsJSON };
+                var json = JObject.FromObject(anObj);
+                ret.Add(json);
+            }
+            
+            return ret;
+            
         }
 
 
@@ -84,8 +84,25 @@ namespace HoloTour.DataAcesss
 
         public override JObject GetPoiGuide(IPointOfInterest pointofInterest)
         {
-            1.ToString();
-            throw new NotImplementedException();
+            var jsonStr =
+@"{
+  'PointOfInterestId': 1,
+  'PointOfInterestTitle': 'Tower of David',
+  'Audio': {},
+  'ImagesByLocation': {
+    'Key': {
+      'Latitude': 0.0,
+      'Longitude': 0.0
+    },
+    'Value': null
+  },
+  'ImagesByLocationOnAudio': {
+    'Key': '00:00:00',
+    'Value': null
+  },
+  'Text': '\r\nThe Tower of David\r\n?The Tower of David Museum in Jerusalem is one site that no visitor should miss. This amazing museum offers you the opportunity to experience captivating exhibits that will deepen your understanding of the Holy City. But, even more, its very stones are part of this city’s living history.'
+}".Replace("'","\"");
+            return JObject.Parse(jsonStr);
         }
     }
 }

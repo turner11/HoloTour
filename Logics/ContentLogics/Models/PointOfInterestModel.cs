@@ -1,5 +1,5 @@
 ﻿using HoloTour.ContentLogics;
-using HoloTour.DataAcesss.Interfaces;
+using HoloTour.Common.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -33,7 +33,7 @@ namespace HoloTour.Models
         public Xamarin.Forms.Image Image { get; }
         public Guide Guide { get; private set; }
 
-        public PointOfInterestModel(string jsonString)
+        public PointOfInterestModel(JObject jsonObject)
         {
 
             this._contentService = ContentService.Factory();
@@ -47,7 +47,7 @@ namespace HoloTour.Models
 Path 'Position', line 4, position 15.
              */
 
-            var jsonObject = Newtonsoft.Json.Linq.JObject.Parse(jsonString);
+            //var jsonObject = Newtonsoft.Json.Linq.JObject.Parse(jsonString);
             this.Id = jsonObject.Value<int>("Id");
             this.Title = jsonObject.Value<string>("Title");
             
@@ -72,6 +72,9 @@ Path 'Position', line 4, position 15.
             this.Guide = guide;
         }
 
-        
+        public override string ToString()
+        {
+            return $"Point of interest: {this.Title}; [{this.Position}]";
+        }
     }
 }

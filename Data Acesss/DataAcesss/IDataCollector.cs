@@ -1,4 +1,4 @@
-﻿using HoloTour.DataAcesss.Interfaces;
+﻿using HoloTour.Common.Interfaces;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 

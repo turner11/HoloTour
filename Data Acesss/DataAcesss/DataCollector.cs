@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HoloTour.DataAcesss.Interfaces;
+using HoloTour.Common.Interfaces;
 
 namespace HoloTour.DataAcesss
 {

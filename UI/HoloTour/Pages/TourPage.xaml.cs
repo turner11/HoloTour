@@ -18,7 +18,7 @@ namespace HoloTour.Pages
             this._model = model;
 
             //add all points of interest to route
-            this.MapView.RouteCoordinates.AddRange(this._model.PointOfInterest.Select(poi=> poi.Position));
+            this.MapView.RouteCoordinates.AddRange(this._model.PointsOfInterest.Select(poi=> poi.Position));
             
 
             this.lblLocation.IsVisible = false;
@@ -29,9 +29,9 @@ namespace HoloTour.Pages
 
         private void TourPage_Appearing(object sender, EventArgs e)
         {
-            if (this._model.PointOfInterest.Count == 0)
+            if (this._model.PointsOfInterest.Count == 0)
                 return;
-            var pins = this._model.PointOfInterest.Select(poi => new Pin()
+            var pins = this._model.PointsOfInterest.Select(poi => new Pin()
                                                                     {
                                                                         Position = poi.Position,
                                                                         Label = poi.Title,
@@ -55,7 +55,7 @@ namespace HoloTour.Pages
             if (pin == null)
                 return;
 
-            var poi = this._model.PointOfInterest.Where(p => p.Position == pin.Position).FirstOrDefault();
+            var poi = this._model.PointsOfInterest.Where(p => p.Position == pin.Position).FirstOrDefault();
                 
             var textToDisplay = poi.Guide.Text;
             this.lblLocation.Text = pin.Label + ": "+textToDisplay;

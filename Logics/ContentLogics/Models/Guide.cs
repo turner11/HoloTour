@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using HoloTour.Common.Interfaces;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,8 @@ namespace HoloTour.Models
 {
     public class Guide
     {
+        public int PointOfInterestId { get; }
+        public string PointOfInterestTitle { get; }
         /// <summary>
         /// Gets the audio guide.
         /// </summary>
@@ -31,12 +34,32 @@ namespace HoloTour.Models
         /// images associated toth is guide 
         /// </value>
         public KeyValuePair<TimeSpan, Xamarin.Forms.Image[]> ImagesByLocationOnAudio{ get; }//TODO:Once inplemented, give more descriptive name
-        public string Text { get { return "This is a lovely place!"; } }
+        public string Text { get ; }
 
 
-        public Guide(JObject json)
+        
+        public Guide(JObject json):
+            this(json[nameof(PointOfInterestId)].Value<int>(),
+                json[nameof(PointOfInterestTitle)].Value<string>(),
+                json[nameof(Text)].Value<string>())
         {
 
+        }
+
+        public Guide(IPointOfInterest pointOfInterest, string text):this(pointOfInterest.Id,pointOfInterest.Title, text)
+        {
+          
+        }
+        public Guide(int pointOfInterestId, string pointOfInterestTitle, string text)
+        {
+            this.PointOfInterestId = pointOfInterestId;
+            this.PointOfInterestTitle = pointOfInterestTitle;
+            this.Text = text;
+        }
+
+        public override string ToString()
+        {
+            return $"Guide of {this.PointOfInterestTitle}";
         }
     }
 }
