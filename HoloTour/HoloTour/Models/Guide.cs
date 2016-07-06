@@ -29,7 +29,13 @@ namespace HoloTour.Models
         /// <value>
         /// images associated toth is guide 
         /// </value>
-        public KeyValuePair<TimeSpan, Xamarin.Forms.Image[]> ImagesByLocationOnAudio{ get; }//TODO:Once inomlemente, give more descriptive name
+        public KeyValuePair<TimeSpan, Xamarin.Forms.Image[]> ImagesByLocationOnAudio{ get; }//TODO:Once inplemented, give more descriptive name
         public string Text { get { return "This is a lovely place!"; } }
+
+
+        public Guide(string json)
+        {
+
+        }
     }
 }
