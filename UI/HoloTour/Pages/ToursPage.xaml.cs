@@ -23,7 +23,7 @@ namespace HoloTour.Pages
 
             Label header = new Label
             {
-                Text = "ListView",
+                Text = "Avilable Tours",
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Center
             };
