@@ -89,7 +89,12 @@ namespace HoloTour.Pages
 
                  Label nameLabel = new Label()
                  {
-                     HorizontalOptions = LayoutOptions.FillAndExpand
+                     HorizontalOptions = LayoutOptions.FillAndExpand,
+                     FontSize = 20,
+                     FontAttributes = FontAttributes.Bold,
+                     TextColor = Color.White
+                     
+                    
                  };
                  nameLabel.SetBinding(Label.TextProperty, nameof(dummyTour.Name));
 
