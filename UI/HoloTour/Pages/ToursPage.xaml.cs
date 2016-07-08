@@ -19,10 +19,14 @@ namespace HoloTour.Pages
             this._contentService = ContentLogics.ContentService.Factory();
 
             InitializeComponent();
-            this._lstTours = this.GetBindedList();
-            this._lstTours.BindingContextChanged += lstTours_BindingContextChanged;
-            this._lstTours.SeparatorColor = Color.Blue;
-            this._lstTours.RowHeight = 200;
+
+            this.SizeChanged += this.ToursPage_SizeChanged;
+
+            this._lstTours = new ListView();
+            this._lstTours.BindingContextChanged += this.lstTours_BindingContextChanged;
+
+            this.BindList();
+            this.SetListTemplate();
 
             Label header = new Label
             {
@@ -46,82 +50,93 @@ namespace HoloTour.Pages
             this._lstTours.ItemSelected += lstTours_ItemSelected;
         }
 
-     
-
-        private ListView GetBindedList()
+        private void ToursPage_SizeChanged(object sender, EventArgs e)
         {
-            var lst = new ListView();
-            lst.ItemTemplate = this.GetListTemplate();
+            this.SetListTemplate();
+        }
+        
+        private void BindList()
+        {
             var tours = this._contentService.GetTours();
-            lst.ItemsSource = tours;
-
-            return lst;
-
+            this._lstTours.ItemsSource = tours;
         }
 
-        private DataTemplate GetListTemplate()
+        private void SetListTemplate()
+        {
+            this._lstTours.RowHeight = 200;
+            this._lstTours.ItemTemplate = this.GetListCellTemplate();
+        }
+
+        private DataTemplate GetListCellTemplate()
         {
             // Define template for displaying each item.
             // (Argument of DataTemplate constructor is called for 
             //      each item; it must return a Cell derivative.)
-
+            
             TourModel dummyTour = null;
             var tmplate = new DataTemplate(() =>
              {
-                // Create views with bindings for displaying each property.
-                Label nameLabel = new Label();
-                 nameLabel.SetBinding(Label.TextProperty, nameof(dummyTour.Name));
-                 nameLabel.HorizontalOptions = LayoutOptions.FillAndExpand;
-
-
-                 Label birthdayLabel = new Label();
-                 birthdayLabel.SetBinding(Label.TextProperty,
-                     new Binding(nameof(dummyTour.Created), BindingMode.OneWay,
-                         null, null, "Created At {0:d}"));
-
-                 //BoxView boxView = new BoxView();
-                 //boxView.SetBinding(BoxView.ColorProperty, nameof(dummyTour.Color));
-                 var image = new Image();
-                 image.SetBinding(Image.SourceProperty, nameof(dummyTour.ImageAsImageSource));
-                 image.Aspect = Aspect.Fill;
-                 image.HorizontalOptions = LayoutOptions.Center;
-                 // Return an assembled ViewCell.
-
-                 var boxView = new BoxView();
-                 boxView.Color = Color.White;
-                 //boxView.HeightRequest = 10;
-                 boxView.HorizontalOptions = LayoutOptions.FillAndExpand;
-
-
-                 var outerlayOut = new StackLayout
+                 // Create views with bindings for displaying each property.
+                 
+                 var image = new Image()
                  {
+                     Aspect =Aspect.AspectFill,// Aspect.Fill, //
+                     HorizontalOptions = LayoutOptions.Center,
+                     WidthRequest=10000000
+                    
+                 };
+                 image.SetBinding(Image.SourceProperty, nameof(dummyTour.ImageAsImageSource));
 
-                     BackgroundColor = Color.White,
-                     //Padding = new Thickness(0, 5),
-                     //Orientation = StackOrientation.Horizontal,
+                 Label nameLabel = new Label()
+                 {
+                     HorizontalOptions = LayoutOptions.FillAndExpand
+                 };
+                 nameLabel.SetBinding(Label.TextProperty, nameof(dummyTour.Name));
+
+
+                 var boxView = new BoxView()
+                 {
+                     Color = Color.Blue,
+                     HorizontalOptions = LayoutOptions.FillAndExpand,
                  };
 
+                 //Creates layouts that will hold views
+                 var outerlayOut = new StackLayout
+                 {
+                     BackgroundColor = Color.White,
+                     Padding = new Thickness(0, 5),
+                     Orientation = StackOrientation.Horizontal,
 
-                 var innerLayout = new RelativeLayout();
-             innerLayout.Children.Add(image,
-            xConstraint: Constraint.Constant(0),
-            yConstraint: Constraint.Constant(0),
-            widthConstraint: Constraint.RelativeToParent((parent) => { return parent.Width; }),
-            heightConstraint:Constraint.RelativeToParent((parent) => {return parent.Height*3/4;}));
+                 };
+                 //The inner layout will actualy hold the view items
+                 var innerLayout = new RelativeLayout() { BackgroundColor = Color.Pink};
+                 outerlayOut.Children.Add(innerLayout);
+
+
+                 innerLayout.Children.Add(image,
+                        xConstraint:     Constraint.Constant(0),
+                        yConstraint:     Constraint.Constant(0),
+                        widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
+                        // heightConstraint:Constraint.RelativeToParent((parent) => {return Math.Max(1,parent.Height*3/4);}));
+                        heightConstraint:Constraint.RelativeToParent((parent) =>  parent.Height*4/5)
+                                         );
 
                  innerLayout.Children.Add(nameLabel,
-                     Constraint.Constant(0),
-                     Constraint.Constant(0),
-                     Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                     Constraint.RelativeToParent((parent) => { return parent.Height; }));
+                         xConstraint:     Constraint.Constant(0),
+                         yConstraint:     Constraint.Constant(0),
+                         widthConstraint: Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                         heightConstraint:Constraint.RelativeToParent((parent) => { return parent.Height; }));
 
                  innerLayout.Children.Add(boxView,
-                      Constraint.Constant(0),
-                        Constraint.Constant(0),
-                     Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                     Constraint.RelativeToParent((parent) => { return parent.Height < 0 ? parent.Height : parent.Height / 4; }));
+                        xConstraint:     Constraint.Constant(0),
+                        yConstraint:     Constraint.RelativeToView(image, (parent, view) => view.Y + view.Height),
+                        widthConstraint: Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                        heightConstraint: Constraint.RelativeToView(image, (parent, view) => parent.Height - view.Height)
+                     );
 
-                 outerlayOut.Children.Add(innerLayout);
+
+
+                 // Return an assembled ViewCell.
                  return new ViewCell
                  {
                     
@@ -133,9 +148,6 @@ namespace HoloTour.Pages
 
 
         }
-
-
-
 
         private void lstTours_BindingContextChanged(object sender, EventArgs e)
         {
@@ -152,6 +164,13 @@ namespace HoloTour.Pages
             var selectedTour = e.SelectedItem as TourModel;
             if (selectedTour != null)
             {
+                this._lstTours.SelectedItem = null;//this is for consecutive clicks on intem will reflect in event...
+                //this._lstTours.ItemTemplate = this.GetListCellTemplate();
+
+                //var ts = this._contentService.GetTours();
+                //this._lstTours.ItemsSource = ts;
+                //return;
+
                 selectedTour.Initialize();
                 //Navigation.PushAsync(new  MainPage());
                 Navigation.PushAsync(new TourPage(selectedTour));

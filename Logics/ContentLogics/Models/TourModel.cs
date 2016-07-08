@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using HoloTour.ContentLogics.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,22 +29,31 @@ namespace HoloTour.Models
 
         public ReadOnlyCollection<PointOfInterestModel> PointsOfInterest { get; }
 
+        public City City { get; }
+        public string Caption { get; }
+
         public TourModel(JObject json)
             :this(json["Name"].Value<string>(), 
                  json["ImageBytes"].Value<byte[]>(),
-                  json["PointsOfInterest"].Select(poiJson => new PointOfInterestModel(poiJson as JObject)).ToList())
+                  json["PointsOfInterest"].Select(poiJson => new PointOfInterestModel(poiJson as JObject)).ToList(),
+                  json["City"].Value<string>(),
+                  json["Caption"].Value<string>())
         {
-            //var name = json["Name"].Value<string>();
-            //var poisJson = json["PointsOfInterest"];
-            //var pois = poisJson.Select(poiJson => new PointOfInterestModel(poiJson)).ToList();
+           
            
         }
-        public TourModel(string name,byte[] imageByte, IEnumerable<PointOfInterestModel> pointsOfInterest)
+        public TourModel(string name,
+            byte[] imageByte, 
+            IEnumerable<PointOfInterestModel> pointsOfInterest,
+            string city, 
+            string caption)
         {
             this.Name = name;
             this.ImageBytes = imageByte;
             pointsOfInterest = pointsOfInterest ?? new List<PointOfInterestModel>();
             this.PointsOfInterest = new ReadOnlyCollection<PointOfInterestModel>(pointsOfInterest.ToList());
+            this.City = new City(-1,city,0);
+            this.Caption = caption;
         }
 
         
