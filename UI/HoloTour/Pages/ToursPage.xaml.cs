@@ -54,7 +54,7 @@ namespace HoloTour.Pages
         {
             this.SetListTemplate();
         }
-        
+
         private void BindList()
         {
             var tours = this._contentService.GetTours();
@@ -63,29 +63,47 @@ namespace HoloTour.Pages
 
         private void SetListTemplate()
         {
-            this._lstTours.RowHeight = 200;
-            this._lstTours.ItemTemplate = this.GetListCellTemplate();
+            this._lstTours.BeginRefresh();
+            try
+            {
+                this._lstTours.ItemTemplate = this.GetListCellTemplate();
+                this._lstTours.RowHeight = 200;
+            }
+            finally
+            {
+                this._lstTours.EndRefresh();
+            }
+
+            this.ForceLayout();
         }
+
 
         private DataTemplate GetListCellTemplate()
         {
             // Define template for displaying each item.
             // (Argument of DataTemplate constructor is called for 
             //      each item; it must return a Cell derivative.)
-            
+
             TourModel dummyTour = null;
             var tmplate = new DataTemplate(() =>
              {
                  // Create views with bindings for displaying each property.
-                 
+
+                 #region Define the view items
                  var image = new Image()
                  {
-                     Aspect =Aspect.AspectFill,// Aspect.Fill, //
-                     HorizontalOptions = LayoutOptions.Center,
-                     WidthRequest=10000000
-                    
+                     Aspect = Aspect.Fill, //Aspect.AspectFill,//
+                     HorizontalOptions = LayoutOptions.Fill,// LayoutOptions.Center,
+                                                            //WidthRequest=10000000
+
                  };
                  image.SetBinding(Image.SourceProperty, nameof(dummyTour.ImageAsImageSource));
+
+                 var boxView = new BoxView()
+                 {
+                     Color = Color.White,
+                     HorizontalOptions = LayoutOptions.FillAndExpand,
+                 };
 
                  Label nameLabel = new Label()
                  {
@@ -98,12 +116,22 @@ namespace HoloTour.Pages
                  };
                  nameLabel.SetBinding(Label.TextProperty, nameof(dummyTour.Name));
 
-
-                 var boxView = new BoxView()
+                 Label captionlabel = new Label()
                  {
-                     Color = Color.Blue,
                      HorizontalOptions = LayoutOptions.FillAndExpand,
+                     TextColor = Color.Gray
                  };
+                 captionlabel.SetBinding(Label.TextProperty, nameof(dummyTour.Caption));
+
+                 var seperator = new BoxView()
+                 {
+                     Color = Color.Black,
+                     HeightRequest = 5
+                     
+                 };
+
+                 #endregion
+
 
                  //Creates layouts that will hold views
                  var outerlayOut = new StackLayout
@@ -114,41 +142,50 @@ namespace HoloTour.Pages
 
                  };
                  //The inner layout will actualy hold the view items
-                 var innerLayout = new RelativeLayout() { BackgroundColor = Color.Pink};
+                 var innerLayout = new RelativeLayout() { BackgroundColor = Color.Lime };
                  outerlayOut.Children.Add(innerLayout);
 
-
+                 //Add views to layouts
                  innerLayout.Children.Add(image,
-                        xConstraint:     Constraint.Constant(0),
-                        yConstraint:     Constraint.Constant(0),
+                        xConstraint: Constraint.Constant(0),
+                        yConstraint: Constraint.Constant(0),
                         widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
                         // heightConstraint:Constraint.RelativeToParent((parent) => {return Math.Max(1,parent.Height*3/4);}));
-                        heightConstraint:Constraint.RelativeToParent((parent) =>  parent.Height*4/5)
+                        heightConstraint: Constraint.RelativeToParent((parent) => parent.Height * 4 / 5)
                                          );
 
-                 innerLayout.Children.Add(nameLabel,
-                         xConstraint:     Constraint.Constant(0),
-                         yConstraint:     Constraint.Constant(0),
-                         widthConstraint: Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                         heightConstraint:Constraint.RelativeToParent((parent) => { return parent.Height; }));
-
                  innerLayout.Children.Add(boxView,
-                        xConstraint:     Constraint.Constant(0),
-                        yConstraint:     Constraint.RelativeToView(image, (parent, view) => view.Y + view.Height),
-                        widthConstraint: Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                        heightConstraint: Constraint.RelativeToView(image, (parent, view) => parent.Height - view.Height)
-                     );
+                      xConstraint: Constraint.Constant(0),
+                      yConstraint: Constraint.RelativeToView(image, (parent, view) => view.Y + view.Height),
+                      widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
+                      heightConstraint: Constraint.RelativeToView(image, (parent, view) => parent.Height - view.Height)
+                                       );
 
+                 innerLayout.Children.Add(nameLabel,
+                 xConstraint: Constraint.Constant(0),
+                 yConstraint: Constraint.RelativeToView(boxView, (parent, view) => view.Y+2));
+
+
+
+                 innerLayout.Children.Add(captionlabel,
+                      xConstraint: Constraint.RelativeToView(nameLabel, (parent, view) => view.X),
+                      yConstraint: Constraint.RelativeToView(nameLabel, (parent, view) => view.Y + view.Height-1));
+
+                 //innerLayout.Children.Add(seperator,
+                 //    xConstraint: Constraint.RelativeToView(captionlabel, (parent, view) => parent.Width / 4),
+                 //    yConstraint: Constraint.RelativeToView(captionlabel, (parent, view) => view.Y + view.Height),
+                 //    widthConstraint: Constraint.RelativeToView(captionlabel, (parent, view) => parent.Width / 2),
+                 //    heightConstraint: Constraint.Constant(1)
+                 //                          );
 
 
                  // Return an assembled ViewCell.
-                 return new ViewCell
-                 {
+                 return new ViewCell{
                     
                      View = outerlayOut
                  };
              });
-
+            
             return tmplate;
 
 
@@ -159,17 +196,18 @@ namespace HoloTour.Pages
             base.OnBindingContextChanged();
             //var tour= (TourModel)this.BindingContext;
             //var image = this.GetImageForTour(tour);
-            
-            
+
+
         }
-    
+
 
         private void lstTours_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var selectedTour = e.SelectedItem as TourModel;
             if (selectedTour != null)
             {
-                this._lstTours.SelectedItem = null;//this is for consecutive clicks on intem will reflect in event...
+                //this._lstTours.SelectedItem = null;//this is for consecutive clicks on intem will reflect in event...
+                ///*handy for debugging*/
                 //this._lstTours.ItemTemplate = this.GetListCellTemplate();
 
                 //var ts = this._contentService.GetTours();

@@ -31,6 +31,7 @@ namespace HoloTour.Models
 
         public City City { get; }
         public string Caption { get; }
+        
 
         public TourModel(JObject json)
             :this(json["Name"].Value<string>(), 
@@ -68,7 +69,7 @@ namespace HoloTour.Models
 
         public override string ToString()
         {
-            return $"Tour: {this.Name}; {this.PointsOfInterest} Points of interest";
+            return $"{this.City}: {this.Name}";
         }
     }
 }
