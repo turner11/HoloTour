@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HoloTour.Models
 {
-    class ToursModel
+    public class ToursModel
     {
 
         readonly ContentLogics.ContentService _contentService;

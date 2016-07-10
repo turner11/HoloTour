@@ -14,19 +14,7 @@ namespace HoloTour.Models
     {
         public string Name { get;  }
         public byte[] ImageBytes { get; }
-
-        public ImageSource ImageAsImageSource
-        {
-            get
-            {
-                return ImageSource.FromStream(() => new System.IO.MemoryStream(this.ImageBytes));
-
-            }
-        }
-        public DateTime Created { get { return DateTime.Today; } }
-
-        public Color Color { get { return Color.Purple; } }
-
+        
         public ReadOnlyCollection<PointOfInterestModel> PointsOfInterest { get; }
 
         public City City { get; }

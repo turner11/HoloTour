@@ -1,4 +1,5 @@
-﻿using HoloTour.Models;
+﻿//using HoloTour.Models;
+using HoloTour.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,12 @@ namespace HoloTour.Pages
 {
     public partial class ToursPage : ContentPage
     {
-        ContentLogics.ContentService _contentService;
+        private readonly TourCollectionViewModel toursViewModel;
         private readonly ListView _lstTours;
 
         public ToursPage()
         {
-            this._contentService = ContentLogics.ContentService.Factory();
-
+            toursViewModel = new TourCollectionViewModel(new Models.ToursModel());
             InitializeComponent();
 
             this.SizeChanged += this.ToursPage_SizeChanged;
@@ -57,8 +57,7 @@ namespace HoloTour.Pages
 
         private void BindList()
         {
-            var tours = this._contentService.GetTours();
-            this._lstTours.ItemsSource = tours;
+            this._lstTours.ItemsSource = toursViewModel.Tours;
         }
 
         private void SetListTemplate()
@@ -84,7 +83,7 @@ namespace HoloTour.Pages
             // (Argument of DataTemplate constructor is called for 
             //      each item; it must return a Cell derivative.)
 
-            TourModel dummyTour = null;
+            ShallowTourViewModel dummyTour = null;
             var tmplate = new DataTemplate(() =>
              {
                  // Create views with bindings for displaying each property.
@@ -142,7 +141,7 @@ namespace HoloTour.Pages
 
                  };
                  //The inner layout will actualy hold the view items
-                 var innerLayout = new RelativeLayout() { BackgroundColor = Color.Lime };
+                 var innerLayout = new RelativeLayout() { BackgroundColor = Color.White };
                  outerlayOut.Children.Add(innerLayout);
 
                  //Add views to layouts
@@ -162,8 +161,8 @@ namespace HoloTour.Pages
                                        );
 
                  innerLayout.Children.Add(nameLabel,
-                 xConstraint: Constraint.Constant(0),
-                 yConstraint: Constraint.RelativeToView(boxView, (parent, view) => view.Y+2));
+                 xConstraint: Constraint.RelativeToView(boxView, (parent, view) => view.X + 2),
+                 yConstraint: Constraint.RelativeToView(boxView, (parent, view) => view.Y + 2));
 
 
 
@@ -203,7 +202,7 @@ namespace HoloTour.Pages
 
         private void lstTours_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var selectedTour = e.SelectedItem as TourModel;
+            var selectedTour = e.SelectedItem as ShallowTourViewModel;
             if (selectedTour != null)
             {
                 //this._lstTours.SelectedItem = null;//this is for consecutive clicks on intem will reflect in event...
@@ -214,9 +213,11 @@ namespace HoloTour.Pages
                 //this._lstTours.ItemsSource = ts;
                 //return;
 
-                selectedTour.Initialize();
+
                 //Navigation.PushAsync(new  MainPage());
-                Navigation.PushAsync(new TourPage(selectedTour));
+                var model = (Models.TourModel)selectedTour;
+                var vModel = new TourViewModel(model);
+                Navigation.PushAsync(new TourPage(vModel));
                 //App.Current.MainPage = new MainPage();
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HoloTour.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,27 +12,25 @@ namespace HoloTour.Pages
 {
     public partial class TourPage : ContentPage
     {
-        Models.TourModel _model { get; }
-        public TourPage(Models.TourModel model)
+        TourViewModel _tourViewModel { get; }
+        public TourPage(TourViewModel viewModel)
         {
             InitializeComponent();
-            this._model = model;
-
+            this._tourViewModel = viewModel;
+            
             //add all points of interest to route
-            this.MapView.RouteCoordinates.AddRange(this._model.PointsOfInterest.Select(poi=> poi.Position));
+            this.MapView.RouteCoordinates.AddRange(this._tourViewModel.PointsOfInterest.Select(poi=> poi.Position));
             
 
             this.lblLocation.IsVisible = false;
             this.Appearing += TourPage_Appearing;
-
-            
         }
 
         private void TourPage_Appearing(object sender, EventArgs e)
         {
-            if (this._model.PointsOfInterest.Count == 0)
+            if (this._tourViewModel.PointsOfInterest.Count == 0)
                 return;
-            var pins = this._model.PointsOfInterest.Select(poi => new Pin()
+            var pins = this._tourViewModel.PointsOfInterest.Select(poi => new Pin()
                                                                     {
                                                                         Position = poi.Position,
                                                                         Label = poi.Title,
@@ -55,7 +54,7 @@ namespace HoloTour.Pages
             if (pin == null)
                 return;
 
-            var poi = this._model.PointsOfInterest.Where(p => p.Position == pin.Position).FirstOrDefault();
+            var poi = this._tourViewModel.PointsOfInterest.Where(p => p.Position == pin.Position).FirstOrDefault();
                 
             var textToDisplay = poi.Guide.Text;
             this.lblLocation.Text = pin.Label + ": "+textToDisplay;
