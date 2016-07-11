@@ -106,10 +106,8 @@ namespace HoloTour.Pages
 
                  Label nameLabel = new Label()
                  {
-                     HorizontalOptions = LayoutOptions.FillAndExpand,
-                     FontSize = 20,
-                     FontAttributes = FontAttributes.Bold,
-                     TextColor = Color.White
+                     HorizontalOptions = LayoutOptions.FillAndExpand,                     
+                     TextColor = Color.Black
                      
                     
                  };

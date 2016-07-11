@@ -9,13 +9,7 @@
              Padding="10" >
     
   <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
-    <!--<maps:Map
-          WidthRequest="100"
-          HeightRequest="100"
-          x:Name="MapView"
-        MapType="Hybrid"
-        HorizontalOptions="FillAndExpand"
-      VerticalOptions="FillAndExpand"/>-->
+  
     
     <local:MapWithRoute 
       x:Name="MapView" 

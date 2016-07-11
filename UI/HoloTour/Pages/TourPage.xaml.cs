@@ -24,12 +24,24 @@ namespace HoloTour.Pages
 
             this.lblLocation.IsVisible = false;
             this.Appearing += TourPage_Appearing;
+           
         }
 
-        private void TourPage_Appearing(object sender, EventArgs e)
+        /// <summary>
+        /// Indicates that the Page is about to appear.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private async void TourPage_Appearing(object sender, EventArgs e)
         {
             if (this._tourViewModel.PointsOfInterest.Count == 0)
                 return;
+
+            var mapLocatoion = this.MapView.RouteCoordinates.FirstOrDefault();
+            var region = MapSpan.FromCenterAndRadius(mapLocatoion, Distance.FromKilometers(1));
+            this.MapView.MoveToRegion(region);
+
+            await Task.Delay(TimeSpan.FromSeconds(3)).ConfigureAwait(false);//want to see if will load faster and how will look...
             var pins = this._tourViewModel.PointsOfInterest.Select(poi => new Pin()
                                                                     {
                                                                         Position = poi.Position,
@@ -38,13 +50,11 @@ namespace HoloTour.Pages
                                                                     }).ToArray();
 
             
-            var mapLocatoion = this.MapView.RouteCoordinates.FirstOrDefault();
-            var region = MapSpan.FromCenterAndRadius(mapLocatoion, Distance.FromKilometers(1));
-            this.MapView.MoveToRegion(region);
             foreach (var pin in pins)
             {
                 pin.Clicked += Pin_Clicked;
-                this.MapView.Pins.Add(pin);
+                await Task.Delay(TimeSpan.FromSeconds(0.25));
+                Device.BeginInvokeOnMainThread(()=>this.MapView.Pins.Add(pin));
             }
         }
 
