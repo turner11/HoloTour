@@ -40,6 +40,12 @@
     </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="Controls\MapWithRoute.cs" />
+    <Compile Include="Pages\PointofInterestPage.xaml.cs">
+      <DependentUpon>PointofInterestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TourOverviewPage.xaml.cs">
+      <DependentUpon>TourOverviewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TourPage.xaml.cs">
       <DependentUpon>TourPage.xaml</DependentUpon>
     </Compile>
@@ -65,9 +71,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\GuideViewModel.cs" />
+    <Compile Include="ViewModels\PointOfInterestViewModel.cs" />
     <Compile Include="ViewModels\TourCollectionViewModel.cs" />
     <Compile Include="ViewModels\ShallowTourViewModel.cs" />
     <Compile Include="ViewModels\TourViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -174,6 +183,18 @@
       <Project>{abe850cd-20f9-45e1-b936-e0ae80b0b839}</Project>
       <Name>ContentLogics</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\PointofInterestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\TourOverviewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.1.110-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.1.110-pre1\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

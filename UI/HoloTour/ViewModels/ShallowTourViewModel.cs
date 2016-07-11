@@ -9,18 +9,18 @@ using Xamarin.Forms;
 
 namespace HoloTour.ViewModels
 {
-    public class ShallowTourViewModel
+    public class ShallowTourViewModel: ViewModelBase
     {
         protected TourModel _tour;
         public string Name { get { return $"{this._tour.City.Title}, {this._tour.Name}"; } }
-        public ReadOnlyCollection<PointOfInterestModel> PointsOfInterest { get { return this._tour.PointsOfInterest; } }
+        public ReadOnlyCollection<PointOfInterestViewModel> PointsOfInterest { get; }
 
      
         public ImageSource ImageAsImageSource
         {
             get
             {
-                return ImageSource.FromStream(() => new System.IO.MemoryStream(this._tour.ImageBytes));
+                return ViewModelBase.BytesToImage(this._tour.ImageBytes); 
 
             }
         }
@@ -29,6 +29,8 @@ namespace HoloTour.ViewModels
         public ShallowTourViewModel(TourModel tour)
         {
             this._tour = tour;
+            var pois = this._tour.PointsOfInterest.Select(p=> new PointOfInterestViewModel(p)).ToList();
+            this.PointsOfInterest = new ReadOnlyCollection<PointOfInterestViewModel>(pois);
 
         }
 

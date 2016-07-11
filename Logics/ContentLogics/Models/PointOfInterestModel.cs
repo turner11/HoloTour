@@ -30,7 +30,7 @@ namespace HoloTour.Models
         public string Title { get; }
         public Xamarin.Forms.Maps.Position Position { get; }
 
-        public Xamarin.Forms.Image Image { get; }
+        public byte[] ImageBytes { get; }
         public Guide Guide { get; private set; }
 
         public PointOfInterestModel(JObject jsonObject)

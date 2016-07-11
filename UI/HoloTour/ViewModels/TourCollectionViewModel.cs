@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HoloTour.ViewModels
 {
-    class TourCollectionViewModel
+    class TourCollectionViewModel: ViewModelBase
     {
         ToursModel _toursModel;
 

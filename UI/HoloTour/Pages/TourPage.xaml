@@ -1,33 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<CarouselPage  xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:local="clr-namespace:HoloTour.Controls;assembly=HoloTour"
              x:Class="HoloTour.Pages.TourPage">
-  <StackLayout VerticalOptions="FillAndExpand"
-             HorizontalOptions="FillAndExpand"
-             Padding="10" >
-    
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
-  
-    
-    <local:MapWithRoute 
-      x:Name="MapView" 
-      MapType="Street"  
-       WidthRequest="100"
-          HeightRequest="100"
-      HorizontalOptions="FillAndExpand"
-      VerticalOptions="FillAndExpand"/>
-    <!--WidthRequest="{x:Static local:App.ScreenWidth}" HeightRequest="{x:Static local:App.ScreenHeight}" -->
-  
-  <Label  x:Name="lblLocation"
-          Text=""
-           VerticalOptions="Center"
-           HorizontalOptions="Center" />
-  
-  </StackLayout>
+ 
   
   
   
   
-</ContentPage>
+</CarouselPage >
