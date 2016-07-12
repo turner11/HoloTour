@@ -27,19 +27,15 @@ namespace HoloTour.ContentLogics
 
         public Guide GetPoiGuide(IPointOfInterest pointofInterest)
         {
-           var str = @"
-The Tower of David
-​The Tower of David Museum in Jerusalem is one site that no visitor should miss. This amazing museum offers you the opportunity to experience captivating exhibits that will deepen your understanding of the Holy City. But, even more, its very stones are part of this city’s living history.";
+            
+            //var g = new Guide(pointofInterest, "TTTTTTTTTTTTTTTTTTTT")
+            //{
+            //    Audio = new byte[] { 1,1,1,1,1,1,1,1,1,1,1}
+            //};
+            //var v =JObject.FromObject(g);
 
-
-           var a=  JObject.FromObject(
-                new Guide(pointofInterest, str)
-                );
-           
             JObject guideJson = this._dataCollector.GetPoiGuide(pointofInterest);
-
-            var jObject = this._dataCollector.GetPoiGuide(pointofInterest);
-            return new Guide( jObject);
+            return new Guide( guideJson);
 
         }
 

@@ -17,7 +17,7 @@ namespace HoloTour.Models
         /// <value>
         /// The audio guide.
         /// </value>
-        public byte[] Audio { get; } = new byte[0];//TODO:Implemet...
+        public byte[] Audio { get; set; } = new byte[0];//TODO:Implemet...
 
         /// <summary>
         /// Gets the images associated toth is guide (key:location).

@@ -13,6 +13,8 @@ namespace HoloTour.Models
     public class TourModel
     {
         public string Name { get;  }
+
+        public string Description { get; }
         public byte[] ImageBytes { get; }
         
         public ReadOnlyCollection<PointOfInterestModel> PointsOfInterest { get; }

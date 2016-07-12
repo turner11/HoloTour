@@ -146,7 +146,6 @@ namespace HoloTour.Pages
                         xConstraint: Constraint.Constant(0),
                         yConstraint: Constraint.Constant(0),
                         widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
-                        // heightConstraint:Constraint.RelativeToParent((parent) => {return Math.Max(1,parent.Height*3/4);}));
                         heightConstraint: Constraint.RelativeToParent((parent) => parent.Height * 4 / 5)
                                          );
 
