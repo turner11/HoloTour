@@ -21,6 +21,8 @@ namespace HoloTour.Pages
             InitializeComponent();
 
             this.SizeChanged += this.ToursPage_SizeChanged;
+            this.Appearing += this.ToursPage_Appearing;
+            this.Disappearing += ToursPage_Disappearing;
 
             this._lstTours = new ListView();
             this._lstTours.BindingContextChanged += this.lstTours_BindingContextChanged;
@@ -50,10 +52,7 @@ namespace HoloTour.Pages
             this._lstTours.ItemSelected += lstTours_ItemSelected;
         }
 
-        private void ToursPage_SizeChanged(object sender, EventArgs e)
-        {
-            this.SetListTemplate();
-        }
+     
 
         private void BindList()
         {
@@ -186,6 +185,21 @@ namespace HoloTour.Pages
             return tmplate;
 
 
+        }
+
+        private void ToursPage_Appearing(object sender, EventArgs e)
+        {
+            
+        }
+        private void ToursPage_Disappearing(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        private void ToursPage_SizeChanged(object sender, EventArgs e)
+        {
+            this.SetListTemplate();
         }
 
         private void lstTours_BindingContextChanged(object sender, EventArgs e)

@@ -34,9 +34,12 @@ namespace HoloTour.Pages
             this.SetLayout();
             //LayoutOptions.Start
             //this.lblLocation.IsVisible = false;
-            this.Appearing += TourPage_Appearing;
+            this.Appearing += TourOverviewPage_Appearing;
+            this.Disappearing += TourOverviewPage_Disappearing;
 
         }
+
+       
 
         private DataTemplate GetListTemplate()
         {
@@ -53,7 +56,7 @@ namespace HoloTour.Pages
                                                            //WidthRequest=10000000
 
                 };
-                //image.SetBinding(Image.SourceProperty, nameof(dummyPoi.ImageAsImageSource));
+                image.SetBinding(Image.SourceProperty, nameof(dummyPoi.ImageAsImageSource));
 
                 var boxView = new BoxView()
                 {
@@ -150,8 +153,9 @@ namespace HoloTour.Pages
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void TourPage_Appearing(object sender, EventArgs e)
+        private async void TourOverviewPage_Appearing(object sender, EventArgs e)
         {
+            this.MapView.IsVisible = true;
             if (this._tourViewModel.PointsOfInterest.Count == 0)
                 return;
 
@@ -174,6 +178,11 @@ namespace HoloTour.Pages
                 await Task.Delay(TimeSpan.FromSeconds(0.25));
                 Device.BeginInvokeOnMainThread(() => this.MapView.Pins.Add(pin));
             }
+        }
+
+        private void TourOverviewPage_Disappearing(object sender, EventArgs e)
+        {
+            this.MapView.IsVisible = false;
         }
 
         private async void Pin_Clicked(object sender, EventArgs e)
