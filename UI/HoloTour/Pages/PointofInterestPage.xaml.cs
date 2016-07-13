@@ -32,7 +32,7 @@ namespace HoloTour.Pages
 
             var image = new Image()
             {
-                HorizontalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
                 Aspect = Aspect.AspectFit
                 
             };
