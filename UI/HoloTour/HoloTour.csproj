@@ -179,6 +179,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{9fa02662-f5ac-4986-bd06-85d677bf442b}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Logics\ContentLogics\ContentLogics.csproj">
       <Project>{abe850cd-20f9-45e1-b936-e0ae80b0b839}</Project>
       <Name>ContentLogics</Name>

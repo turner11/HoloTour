@@ -1,4 +1,6 @@
-﻿using HoloTour.Controls;
+﻿using HoloTour.Common;
+using HoloTour.Common.EventArgs;
+using HoloTour.Controls;
 using HoloTour.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,6 +28,7 @@ namespace HoloTour.Pages
             this._lstPoi.ItemsSource = this._tourViewModel.PointsOfInterest;
             this._lstPoi.ItemTemplate= this.GetListTemplate();
             this._lstPoi.RowHeight = 60;
+            this._lstPoi.ItemSelected += lstPoi_ItemSelected;
 
             this.MapView = new MapWithRoute();
             //add all points of interest to route
@@ -40,7 +43,6 @@ namespace HoloTour.Pages
         }
 
        
-
         private DataTemplate GetListTemplate()
         {
             PointOfInterestViewModel dummyPoi = null;
@@ -164,7 +166,11 @@ namespace HoloTour.Pages
                 return;
 
             var mapLocatoion = this.MapView.RouteCoordinates.FirstOrDefault();
-            var region = MapSpan.FromCenterAndRadius(mapLocatoion, Distance.FromKilometers(1));
+            var farMostDistance_meters = this.MapView.RouteCoordinates
+                            .Select(c => MathUtils.GetDistance_Meters(mapLocatoion.Latitude, mapLocatoion.Longitude, c.Latitude, c.Longitude))
+                            .Max();
+            
+            var region = MapSpan.FromCenterAndRadius(mapLocatoion, Distance.FromMeters(farMostDistance_meters));
             this.MapView.MoveToRegion(region);
 
             await Task.Delay(TimeSpan.FromSeconds(3)).ConfigureAwait(false);//want to see if will load faster and how will look...
@@ -211,5 +217,18 @@ namespace HoloTour.Pages
             //    });
             //});
         }
+
+        public event EventHandler<IPointOfInterestArgs> PointOfInterest_Selected;
+
+        private void lstPoi_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var poiVM = e.SelectedItem as PointOfInterestViewModel;
+            if (poiVM != null)
+            {
+            this.PointOfInterest_Selected?.Invoke(this, new IPointOfInterestArgs(poiVM));
+
+            }
+        }
+
     }
 }

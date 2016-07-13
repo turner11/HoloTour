@@ -13,12 +13,15 @@ namespace HoloTour.Pages
     public partial class TourPage : CarouselPage
     {
         TourViewModel _tourViewModel { get; }
+        TourOverviewPage _tourOverviewpage;
         public TourPage(TourViewModel viewModel)
         {
             InitializeComponent();
             this._tourViewModel = viewModel;
 
-            Children.Add(new TourOverviewPage(this._tourViewModel));
+            this._tourOverviewpage = new TourOverviewPage(this._tourViewModel);
+            this._tourOverviewpage.PointOfInterest_Selected += TourOverviewpage_PointOfInterest_Selected;
+            Children.Add(this._tourOverviewpage);
             var pois = this._tourViewModel.PointsOfInterest;
 
             
@@ -30,5 +33,15 @@ namespace HoloTour.Pages
             
         }
 
+        private void TourOverviewpage_PointOfInterest_Selected(object sender, Common.EventArgs.IPointOfInterestArgs e)
+        {
+            var selectedPage = this.Children.OfType<PointofInterestPage>()
+                .Where(p => p.PointOfInterestVM.Id == e.PointOfInterest.Id)
+                .FirstOrDefault();
+            if (selectedPage != null)
+            {
+                this.CurrentPage = selectedPage;
+            }
+        }
     }
 }

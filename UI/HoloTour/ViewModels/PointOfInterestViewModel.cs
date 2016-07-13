@@ -8,9 +8,11 @@ using Xamarin.Forms;
 
 namespace HoloTour.ViewModels
 {
-    public class PointOfInterestViewModel: ViewModelBase
+    public class PointOfInterestViewModel: ViewModelBase, Common.Interfaces.IPointOfInterest
     {
         PointOfInterestModel _pointOfInterestModel { get; }
+
+        public int Id { get { return this._pointOfInterestModel.Id; } }
         public string Title { get { return this._pointOfInterestModel.Title; } }
         public Xamarin.Forms.Maps.Position Position { get { return this._pointOfInterestModel.Position; } }
 
@@ -36,6 +38,8 @@ namespace HoloTour.ViewModels
                 return this._guide;
             }
         }
+
+    
 
         public PointOfInterestViewModel(PointOfInterestModel poi)
         {

@@ -11,12 +11,12 @@ namespace HoloTour.Pages
 {
     public partial class PointofInterestPage : ContentPage
     {
-        private readonly PointOfInterestViewModel _pointOfInterestVM;
+        public readonly PointOfInterestViewModel PointOfInterestVM;
 
         public PointofInterestPage(PointOfInterestViewModel poi)
         {
             InitializeComponent();
-            this._pointOfInterestVM = poi;
+            this.PointOfInterestVM = poi;
 
 
             var lblTitle = new Label()
@@ -25,7 +25,7 @@ namespace HoloTour.Pages
                 HorizontalTextAlignment = TextAlignment.Center,
                 FontAttributes = FontAttributes.Bold
             };
-            lblTitle.SetBinding(Label.TextProperty, nameof(this._pointOfInterestVM.Title));
+            lblTitle.SetBinding(Label.TextProperty, nameof(this.PointOfInterestVM.Title));
 
            
 
@@ -37,21 +37,21 @@ namespace HoloTour.Pages
                 
             };
 
-            image.SetBinding(Image.SourceProperty, nameof(this._pointOfInterestVM.ImageAsImageSource));
+            image.SetBinding(Image.SourceProperty, nameof(this.PointOfInterestVM.ImageAsImageSource));
 
             var lblGuideText = new Label()
             {
                 TextColor = Color.Black,
                 
             };
-            lblGuideText.BindingContext = this._pointOfInterestVM.Guide;
-            lblGuideText.SetBinding(Label.TextProperty, nameof(this._pointOfInterestVM.Guide.Text));
+            lblGuideText.BindingContext = this.PointOfInterestVM.Guide;
+            lblGuideText.SetBinding(Label.TextProperty, nameof(this.PointOfInterestVM.Guide.Text));
 
             var lblScroll = new ScrollView { Content = lblGuideText };
 
             var layout = new RelativeLayout
             {
-                BindingContext = this._pointOfInterestVM,
+                BindingContext = this.PointOfInterestVM,
                 BackgroundColor = Color.White,
                 
                 

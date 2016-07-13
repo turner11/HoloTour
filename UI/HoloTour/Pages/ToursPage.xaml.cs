@@ -224,7 +224,7 @@ namespace HoloTour.Pages
                 //this._lstTours.ItemsSource = ts;
                 //return;
 
-
+                this._lstTours.SelectedItem = null;// this will allow to re select same item...
                 //Navigation.PushAsync(new  MainPage());
                 var model = (Models.TourModel)selectedTour;
                 var vModel = new TourViewModel(model);
