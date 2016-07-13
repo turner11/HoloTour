@@ -60,8 +60,8 @@ Path 'Position', line 4, position 15.
             var longitude = coordinates[1];
             this.Position = new Xamarin.Forms.Maps.Position(latitude,longitude);
 
-            var bObjs = jsonObject.GetValue("imageBytes").ToArray();
-            var imageBytes = bObjs.Cast<JValue>().Where(obj => obj.Value is byte).Select(obj => (byte)obj.Value).ToArray();
+            var imageAsString = jsonObject.GetValue("imageBytes").Value<string>();
+            var imageBytes = Convert.FromBase64String(imageAsString);
             //TODO: add image...
             this.ImageBytes = imageBytes ?? new byte[0];
 
