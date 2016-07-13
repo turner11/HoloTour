@@ -11,10 +11,11 @@ namespace HoloTour.Common
     {
         public static double GetDistance_Meters(double lat1, double long1, double lat2, double long2)
         {
-            CLLocation pointA = new CLLocation(lat1, long1);
-            CLLocation pointB = new CLLocation(lat2, long2);
-            var distanceToB = pointB.DistanceFrom(pointA);
-            return distanceToB;
+            return 1000;
+            //CLLocation pointA = new CLLocation(lat1, long1);
+            //CLLocation pointB = new CLLocation(lat2, long2);
+            //var distanceToB = pointB.DistanceFrom(pointA);
+            //return distanceToB;
         }
     }
 }
