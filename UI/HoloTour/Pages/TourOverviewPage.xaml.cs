@@ -132,14 +132,18 @@ namespace HoloTour.Pages
                  xConstraint: Constraint.Constant(0),
                 yConstraint: Constraint.Constant(0),
                 widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
-                heightConstraint: Constraint.RelativeToParent((parent) => parent.Height/ 2)
+                heightConstraint: Constraint.RelativeToParent((parent) => parent.Height / 2)
 
                 );
 
-            relativeLayout.Children.Add(this._lstPoi,
+            var scrollList = new ScrollView(){Content = this._lstPoi,};
+
+            relativeLayout.Children.Add(scrollList,
                  xConstraint: Constraint.Constant(0),
-                yConstraint: Constraint.RelativeToView(this.MapView,(parent, view)=>view.Y+view.Height)
-                
+                 yConstraint: Constraint.RelativeToView(this.MapView,(parent, view)=>view.Y+view.Height),
+                widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
+                heightConstraint: Constraint.RelativeToView(this.MapView,(parent,view) => parent.Height -  (view.Y+view.Height))
+
                 );
 
 
