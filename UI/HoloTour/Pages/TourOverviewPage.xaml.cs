@@ -2,6 +2,7 @@
 using HoloTour.Common.EventArgs;
 using HoloTour.Controls;
 using HoloTour.ViewModels;
+using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using Plugin.Geolocator.Abstractions;
 
 namespace HoloTour.Pages
 {
@@ -17,6 +19,9 @@ namespace HoloTour.Pages
     {
         private readonly MapWithRoute MapView;
         private ListView _lstPoi;
+       
+
+        public event EventHandler<IPointOfInterestArgs> PointOfInterest_Selected;
 
         TourViewModel _tourViewModel { get; }
         public TourOverviewPage(TourViewModel viewModel)
@@ -26,7 +31,7 @@ namespace HoloTour.Pages
 
             this._lstPoi = new ListView();
             this._lstPoi.ItemsSource = this._tourViewModel.PointsOfInterest;
-            this._lstPoi.ItemTemplate= this.GetListTemplate();
+            this._lstPoi.ItemTemplate = this.GetListTemplate();
             this._lstPoi.RowHeight = 60;
             this._lstPoi.ItemSelected += lstPoi_ItemSelected;
 
@@ -40,9 +45,10 @@ namespace HoloTour.Pages
             this.Appearing += TourOverviewPage_Appearing;
             this.Disappearing += TourOverviewPage_Disappearing;
 
+            
+           
         }
 
-       
         private DataTemplate GetListTemplate()
         {
             PointOfInterestViewModel dummyPoi = null;
@@ -218,7 +224,7 @@ namespace HoloTour.Pages
             //});
         }
 
-        public event EventHandler<IPointOfInterestArgs> PointOfInterest_Selected;
+       
 
         private void lstPoi_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -229,6 +235,8 @@ namespace HoloTour.Pages
 
             }
         }
+
+       
 
     }
 }

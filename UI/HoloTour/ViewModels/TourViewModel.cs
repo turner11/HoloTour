@@ -9,6 +9,7 @@ namespace HoloTour.ViewModels
 {
     public class TourViewModel:ShallowTourViewModel
     {
+        
         public TourViewModel(TourModel tour) :base(tour)
         {
             this._tour.Initialize();

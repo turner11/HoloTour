@@ -8,5 +8,6 @@ namespace HoloTour.Common.Interfaces
 {
     public interface IPointOfInterest: IIdAndTitleObject
     {
+        Xamarin.Forms.Maps.Position Position { get; }
     }
 }
