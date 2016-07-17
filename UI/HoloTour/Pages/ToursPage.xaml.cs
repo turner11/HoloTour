@@ -25,7 +25,7 @@ namespace HoloTour.Pages
             this.Appearing += this.ToursPage_Appearing;
             this.Disappearing += ToursPage_Disappearing;
 
-            this._lstTours = new ListView() { HorizontalOptions= LayoutOptions.Center};
+            this._lstTours = new ListView() { HorizontalOptions = LayoutOptions.Center };
             this._lstTours.BindingContextChanged += this.lstTours_BindingContextChanged;
 
             this.BindList();
@@ -96,6 +96,7 @@ namespace HoloTour.Pages
                      Aspect = Aspect.Fill, //Aspect.AspectFill,//
                      HorizontalOptions = LayoutOptions.Fill,// LayoutOptions.Center,
                                                             //WidthRequest=10000000
+                     HeightRequest = 200,
 
 
                  };
@@ -126,7 +127,7 @@ namespace HoloTour.Pages
 
 
                  #endregion
-                 
+
 
 
                  //var labelslayout = new StackLayout();
@@ -139,7 +140,7 @@ namespace HoloTour.Pages
                  //AbsoluteLayout.SetLayoutFlags(labelslayout, AbsoluteLayoutFlags.None);
 
                  //Add views to layouts
-                 var abslayout = new StackLayout() { BackgroundColor = Color.White, Padding = 3 ,Spacing = 3};
+                 var abslayout = new StackLayout() { BackgroundColor = Color.White, Padding = 3, Spacing = 3 };
                  abslayout.Children.Add(image);
                  //abslayout.Children.Add(labelslayout);
                  abslayout.Children.Add(nameLabel);
