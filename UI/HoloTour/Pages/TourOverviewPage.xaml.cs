@@ -35,7 +35,11 @@ namespace HoloTour.Pages
             this._lstPoi.RowHeight = 60;
             this._lstPoi.ItemSelected += lstPoi_ItemSelected;
 
-            this.MapView = new MapWithRoute();
+            this.MapView = new MapWithRoute()
+            {
+                IsShowingUser = true
+            };
+            
             //add all points of interest to route
             this.MapView.RouteCoordinates.AddRange(this._tourViewModel.PointsOfInterest.Select(poi => poi.Position));
 
