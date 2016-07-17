@@ -25,7 +25,7 @@ namespace HoloTour.Pages
             this.Appearing += this.ToursPage_Appearing;
             this.Disappearing += ToursPage_Disappearing;
 
-            this._lstTours = new ListView();
+            this._lstTours = new ListView() { HorizontalOptions= LayoutOptions.Center};
             this._lstTours.BindingContextChanged += this.lstTours_BindingContextChanged;
 
             this.BindList();
@@ -40,6 +40,7 @@ namespace HoloTour.Pages
 
             this.Content = new StackLayout
             {
+                HorizontalOptions = LayoutOptions.Center,
                 Children =
                 {
                     header,
@@ -53,7 +54,7 @@ namespace HoloTour.Pages
             this._lstTours.ItemSelected += lstTours_ItemSelected;
         }
 
-     
+
 
         private void BindList()
         {
@@ -65,8 +66,9 @@ namespace HoloTour.Pages
             this._lstTours.BeginRefresh();
             try
             {
+                this._lstTours.HasUnevenRows = true;
+                //this._lstTours.RowHeight = 200;
                 this._lstTours.ItemTemplate = this.GetListCellTemplate();
-                this._lstTours.RowHeight = 200;
             }
             finally
             {
@@ -95,94 +97,62 @@ namespace HoloTour.Pages
                      HorizontalOptions = LayoutOptions.Fill,// LayoutOptions.Center,
                                                             //WidthRequest=10000000
 
+
                  };
                  image.SetBinding(Image.SourceProperty, nameof(dummyTour.ImageAsImageSource));
 
-                 var boxView = new BoxView()
-                 {
-                     Color = Color.White,
-                     HorizontalOptions = LayoutOptions.FillAndExpand,
-                 };
+
+
 
                  Label nameLabel = new Label()
                  {
-                     HorizontalOptions = LayoutOptions.FillAndExpand,
+                     // HorizontalOptions = LayoutOptions.FillAndExpand,
                      TextColor = Color.Black,
-                     FontAttributes = FontAttributes.Bold
-                     
-                    
+                     FontAttributes = FontAttributes.Bold,
                  };
                  nameLabel.SetBinding(Label.TextProperty, nameof(dummyTour.Name));
+
+
 
                  Label captionlabel = new Label()
                  {
                      HorizontalOptions = LayoutOptions.FillAndExpand,
                      TextColor = Color.Gray
                  };
+
                  captionlabel.SetBinding(Label.TextProperty, nameof(dummyTour.Caption));
 
-                 var seperator = new BoxView()
-                 {
-                     Color = Color.Black,
-                     HeightRequest = 5
-                     
-                 };
+
+
 
                  #endregion
+                 
 
 
-                 //Creates layouts that will hold views
-                 var outerlayOut = new StackLayout
-                 {
-                     BackgroundColor = Color.White,
-                     Padding = new Thickness(0, 5),
-                     Orientation = StackOrientation.Horizontal,
+                 //var labelslayout = new StackLayout();
+                 //labelslayout.Children.Add(nameLabel);
+                 //labelslayout.Children.Add(captionlabel);
 
-                 };
-                 //The inner layout will actualy hold the view items
-                 var innerLayout = new RelativeLayout() { BackgroundColor = Color.White };
-                 outerlayOut.Children.Add(innerLayout);
+                 //AbsoluteLayout.SetLayoutBounds(image, new Rectangle(0, 0, 1, 0.69));
+                 //AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.SizeProportional);
+                 //AbsoluteLayout.SetLayoutBounds(labelslayout, new Rectangle(0, 0, 1, 0.29));
+                 //AbsoluteLayout.SetLayoutFlags(labelslayout, AbsoluteLayoutFlags.None);
 
                  //Add views to layouts
-                 innerLayout.Children.Add(image,
-                        xConstraint: Constraint.Constant(0),
-                        yConstraint: Constraint.Constant(0),
-                        widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
-                        heightConstraint: Constraint.RelativeToParent((parent) => parent.Height * 4 / 5)
-                                         );
-
-                 innerLayout.Children.Add(boxView,
-                      xConstraint: Constraint.Constant(0),
-                      yConstraint: Constraint.RelativeToView(image, (parent, view) => view.Y + view.Height),
-                      widthConstraint: Constraint.RelativeToParent((parent) => parent.Width),
-                      heightConstraint: Constraint.RelativeToView(image, (parent, view) => parent.Height - view.Height)
-                                       );
-
-                 innerLayout.Children.Add(nameLabel,
-                 xConstraint: Constraint.RelativeToView(boxView, (parent, view) => view.X + 2),
-                 yConstraint: Constraint.RelativeToView(boxView, (parent, view) => view.Y + 2));
+                 var abslayout = new StackLayout() { BackgroundColor = Color.White, Padding = 3 ,Spacing = 3};
+                 abslayout.Children.Add(image);
+                 //abslayout.Children.Add(labelslayout);
+                 abslayout.Children.Add(nameLabel);
+                 abslayout.Children.Add(captionlabel);
 
 
+                 return new ViewCell
+                 {
 
-                 innerLayout.Children.Add(captionlabel,
-                      xConstraint: Constraint.RelativeToView(nameLabel, (parent, view) => view.X),
-                      yConstraint: Constraint.RelativeToView(nameLabel, (parent, view) => view.Y + view.Height-1));
-
-                 //innerLayout.Children.Add(seperator,
-                 //    xConstraint: Constraint.RelativeToView(captionlabel, (parent, view) => parent.Width / 4),
-                 //    yConstraint: Constraint.RelativeToView(captionlabel, (parent, view) => view.Y + view.Height),
-                 //    widthConstraint: Constraint.RelativeToView(captionlabel, (parent, view) => parent.Width / 2),
-                 //    heightConstraint: Constraint.Constant(1)
-                 //                          );
-
-
-                 // Return an assembled ViewCell.
-                 return new ViewCell{
-                    
-                     View = outerlayOut
+                     View = abslayout
                  };
              });
-            
+
             return tmplate;
 
 
@@ -190,17 +160,19 @@ namespace HoloTour.Pages
 
         private void ToursPage_Appearing(object sender, EventArgs e)
         {
-            
+
         }
         private void ToursPage_Disappearing(object sender, EventArgs e)
         {
-            
+
         }
 
 
         private void ToursPage_SizeChanged(object sender, EventArgs e)
         {
-            this.SetListTemplate();
+            //this._lstTours.BackgroundColor = Color.Lime;
+            //(this._lstTours.Parent as View).BackgroundColor = Color.Olive;
+            //this.SetListTemplate();
         }
 
         private void lstTours_BindingContextChanged(object sender, EventArgs e)
@@ -219,11 +191,10 @@ namespace HoloTour.Pages
             if (selectedTour != null)
             {
                 //this._lstTours.SelectedItem = null;//this is for consecutive clicks on intem will reflect in event...
-                ///*handy for debugging*/
-                //this._lstTours.ItemTemplate = this.GetListCellTemplate();
-
-                //var ts = this._contentService.GetTours();
-                //this._lstTours.ItemsSource = ts;
+                /////*handy for debugging*/
+                //this.BindList();
+                //SetListTemplate();
+                //this.ForceLayout();
                 //return;
 
                 this._lstTours.SelectedItem = null;// this will allow to re select same item...
