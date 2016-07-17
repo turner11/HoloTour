@@ -13,6 +13,7 @@ using Xamarin.Forms.Maps;
 
 namespace HoloTour.Pages
 {
+    [Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
     public partial class TourPage : CarouselPage
     {
         TourViewModel _tourViewModel { get; }
@@ -54,7 +55,11 @@ namespace HoloTour.Pages
             double minDistance = 20;
             try
             {
-                await this._geolocator.StartListeningAsync(minTime, minDistance, true).ConfigureAwait(false);
+                if (!this._geolocator.IsListening)
+                {
+                    await this._geolocator.StartListeningAsync(minTime, minDistance, true).ConfigureAwait(false);
+
+                }
 
             }
             catch (Exception ex)

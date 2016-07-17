@@ -10,6 +10,7 @@ using Xamarin.Forms;
 
 namespace HoloTour.Pages
 {
+    [Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
     public partial class ToursPage : ContentPage
     {
         private readonly TourCollectionViewModel toursViewModel;

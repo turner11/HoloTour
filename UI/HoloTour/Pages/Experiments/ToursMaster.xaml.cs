@@ -9,6 +9,7 @@ using Xamarin.Forms;
 
 namespace HoloTour.Pages
 {
+    [Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
     public partial class ToursMaster : ContentPage
     {
         public ListView ListView { get { return listView; } }

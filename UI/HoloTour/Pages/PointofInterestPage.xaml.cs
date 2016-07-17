@@ -9,6 +9,7 @@ using Xamarin.Forms;
 
 namespace HoloTour.Pages
 {
+    [Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
     public partial class PointofInterestPage : ContentPage
     {
         public readonly PointOfInterestViewModel PointOfInterestVM;
@@ -58,7 +59,7 @@ namespace HoloTour.Pages
 
                // Text = this._pointOfInterestVM.Guide.Text
         };
-            Content = layout;
+            
 
             layout.Children.Add(lblTitle,
                      xConstraint: Constraint.Constant(0),
@@ -80,6 +81,7 @@ namespace HoloTour.Pages
                       heightConstraint: Constraint.RelativeToView(image, (parent, view) => parent.Height - view.Height)
                                        );
 
+            this.Content = layout;
             //var a = _pointOfInterestVM.Guide.Text;
         }
     }

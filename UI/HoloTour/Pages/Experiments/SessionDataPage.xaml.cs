@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 namespace HoloTour.Pages
 {
+    [Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
     public partial class SessionDataPage : Xamarin.Forms.Pages.ListDataPage
     {
         const string DATA_URL = "http://demo3143189.mockable.io/sessions";

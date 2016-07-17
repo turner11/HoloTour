@@ -15,6 +15,7 @@ using Plugin.Geolocator.Abstractions;
 
 namespace HoloTour.Pages
 {
+    [Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
     public partial class TourOverviewPage : ContentPage
     {
         private readonly MapWithRoute MapView;

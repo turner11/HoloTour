@@ -11,9 +11,9 @@ using Xamarin.Forms.Maps;
 
 namespace HoloTour.Pages
 {
+    [Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        
         public MainPage()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace HoloTour.Pages
 
 
 
-         
+
 
         }
 
@@ -38,7 +38,7 @@ namespace HoloTour.Pages
             await this.DelayedZoomIn(TimeSpan.FromSeconds(5)).ConfigureAwait(true);
 
             await Task.Delay(TimeSpan.FromSeconds(6));
-            
+
             this.MapView.IsShowingUser = true;
             await this.DelayedZoomIn(TimeSpan.FromSeconds(0));
         }
@@ -49,17 +49,17 @@ namespace HoloTour.Pages
             {
                 var pos = mapPos.Value;
                 var region = MapSpan.FromCenterAndRadius(pos, Distance.FromMiles(0.3));
-                
 
-              
-                
+
+
+
                 this.txtLocation.Text = String.Format("{0} , {1}", pos.Latitude, pos.Longitude);
                 this.txtLocation.IsEnabled = true;
                 this.txtLocation.Keyboard = Keyboard.Numeric;
 
                 this.MapView.MoveToRegion(region);
             }
-            
+
         }
 
         private static async Task<Position?> GetCurrentPosition()
@@ -103,10 +103,10 @@ namespace HoloTour.Pages
 
         private async Task DelayedZoomIn(TimeSpan delay)
         {
-            
-           await Task.Delay(delay);
-          
-           var position = await GetCurrentPosition();
+
+            await Task.Delay(delay);
+
+            var position = await GetCurrentPosition();
             if (position.HasValue)
             {
                 var region = MapSpan.FromCenterAndRadius(position.Value, Distance.FromMiles(0.3));
