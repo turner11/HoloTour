@@ -25,7 +25,7 @@ namespace HoloTour.Pages
             this.Appearing += this.ToursPage_Appearing;
             this.Disappearing += ToursPage_Disappearing;
 
-            this._lstTours = new ListView() { HorizontalOptions = LayoutOptions.Center };
+            this._lstTours = new ListView(ListViewCachingStrategy.RecycleElement) { HorizontalOptions = LayoutOptions.Center };
             this._lstTours.BindingContextChanged += this.lstTours_BindingContextChanged;
 
             this.BindList();

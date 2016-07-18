@@ -30,7 +30,7 @@ namespace HoloTour.Pages
             InitializeComponent();
             this._tourViewModel = viewModel;
 
-            this.ListPointofInterest = new ListView();
+            this.ListPointofInterest = new ListView(ListViewCachingStrategy.RecycleElement);
             this.ListPointofInterest.ItemsSource = this._tourViewModel.PointsOfInterest;
             this.ListPointofInterest.ItemTemplate = this.GetListTemplate();
             this.ListPointofInterest.RowHeight = 60;
