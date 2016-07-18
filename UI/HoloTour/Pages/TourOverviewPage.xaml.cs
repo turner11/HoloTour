@@ -19,7 +19,7 @@ namespace HoloTour.Pages
     public partial class TourOverviewPage : ContentPage
     {
         private readonly MapWithRoute MapView;
-        private ListView _lstPoi;
+        public ListView ListPointofInterest { get; private set; }
        
 
         public event EventHandler<IPointOfInterestArgs> PointOfInterest_Selected;
@@ -30,11 +30,11 @@ namespace HoloTour.Pages
             InitializeComponent();
             this._tourViewModel = viewModel;
 
-            this._lstPoi = new ListView();
-            this._lstPoi.ItemsSource = this._tourViewModel.PointsOfInterest;
-            this._lstPoi.ItemTemplate = this.GetListTemplate();
-            this._lstPoi.RowHeight = 60;
-            this._lstPoi.ItemSelected += lstPoi_ItemSelected;
+            this.ListPointofInterest = new ListView();
+            this.ListPointofInterest.ItemsSource = this._tourViewModel.PointsOfInterest;
+            this.ListPointofInterest.ItemTemplate = this.GetListTemplate();
+            this.ListPointofInterest.RowHeight = 60;
+            this.ListPointofInterest.ItemSelected += lstPoi_ItemSelected;
 
             this.MapView = new MapWithRoute()
             {
@@ -149,7 +149,7 @@ namespace HoloTour.Pages
 
                 );
 
-            var scrollList = new ScrollView(){Content = this._lstPoi,};
+            var scrollList = new ScrollView(){Content = this.ListPointofInterest,};
 
             relativeLayout.Children.Add(scrollList,
                  xConstraint: Constraint.Constant(0),

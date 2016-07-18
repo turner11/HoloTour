@@ -186,7 +186,7 @@ namespace HoloTour.Pages
         }
 
 
-        private void lstTours_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void lstTours_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var selectedTour = e.SelectedItem as ShallowTourViewModel;
             if (selectedTour != null)
@@ -199,11 +199,14 @@ namespace HoloTour.Pages
                 //return;
 
                 this._lstTours.SelectedItem = null;// this will allow to re select same item...
-                //Navigation.PushAsync(new  MainPage());
                 var model = (Models.TourModel)selectedTour;
                 var vModel = new TourViewModel(model);
-                Navigation.PushAsync(new TourPage(vModel));
-                //App.Current.MainPage = new MainPage();
+                /*-----------------------------*/
+                //var tourPage = new MainTourPage(vModel);//this is master detail
+                //tourPage.IsPresented = true;
+                var tourPage = new TourPage(vModel);
+                /*----------------------------*/
+                await Navigation.PushAsync(tourPage);
             }
         }
 
