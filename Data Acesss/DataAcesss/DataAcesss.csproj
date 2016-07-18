@@ -37,8 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataCollector.cs" />
-    <Compile Include="DataSimulator.cs" />
-    <Compile Include="DataSimulatorData.cs" />
+    <Compile Include="Simulator\DataSimulator.cs" />
+    <Compile Include="Simulator\DataSimulatorData.cs" />
     <Compile Include="IDataCollector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -46,6 +46,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Simulator\DataSimulatorData_Goshrim.cs" />
+    <Compile Include="Simulator\DeadSeaTourData.cs" />
+    <Compile Include="Simulator\EfratTourData.cs" />
+    <Compile Include="Simulator\JrusalemPointsOfInterest.cs" />
+    <Compile Include="Simulator\NyTour.cs" />
+    <Compile Include="Simulator\ParisTourData.cs" />
+    <Compile Include="Simulator\PragueTour.cs" />
+    <Compile Include="Simulator\SimulatedTourData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
