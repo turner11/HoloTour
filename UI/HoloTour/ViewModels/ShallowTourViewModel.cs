@@ -39,6 +39,8 @@ namespace HoloTour.ViewModels
             return shVM._tour;
         }
 
+       
+
 
     }
 }
