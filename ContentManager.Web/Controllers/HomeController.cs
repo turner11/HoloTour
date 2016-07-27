@@ -29,8 +29,9 @@ namespace ContentManager.Web.Controllers
 
         public ActionResult EditContent()
         {
-            throw new NotImplementedException("Add an EditContent view");
-            return View();
+
+            return RedirectToAction("Index", "ContentManagement");
+            //return RedirectToAction("../ContentManagement/Index");
         }
     }
 }
