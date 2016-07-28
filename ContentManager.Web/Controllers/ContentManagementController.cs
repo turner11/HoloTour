@@ -11,10 +11,25 @@ namespace ContentManager.Web.Controllers
     public class ContentManagementController : ContentController
     {
         
-        readonly TourViewModel[] _tours;
-        public ContentManagementController()
+        TourViewModel[] _tours
         {
-            this._tours = this.ContentService.GetTours().Select(t => new TourViewModel(t)).ToArray();
+            get
+            {
+                TourViewModel[] ret = 
+                    this.Session[SessionKey_Tours] as
+                TourViewModel[];
+                if (ret == null)
+                {
+                    ret = 
+                    this.ContentService.GetTours().Select(t => new TourViewModel(t)).ToArray();
+                    this.Session[SessionKey_Tours] = ret;
+                }
+                return ret;
+            }
+        }
+        public ContentManagementController()
+        {   
+           
         }
         // GET: ContentManagement
         public ActionResult Index()
