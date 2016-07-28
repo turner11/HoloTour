@@ -1,4 +1,5 @@
-﻿using HoloTour.ContentLogics;
+﻿using ContentManager.ViewModels;
+using HoloTour.ContentLogics;
 using HoloTour.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,17 @@ namespace ContentManager.Web.Controllers
 {
     public class ContentManagementController : ContentController
     {
-        
-        TourViewModel[] _tours
+
+        TourWpfViewModel[] _tours
         {
             get
             {
-                TourViewModel[] ret = 
-                    this.Session[SessionKey_Tours] as
-                TourViewModel[];
+                var ret = this.Session[SessionKey_Tours] as TourWpfViewModel[];
+                
                 if (ret == null)
                 {
                     ret = 
-                    this.ContentService.GetTours().Select(t => new TourViewModel(t)).ToArray();
+                    this.ContentService.GetTours().Select(t => new TourWpfViewModel(t)).ToArray();
                     this.Session[SessionKey_Tours] = ret;
                 }
                 return ret;

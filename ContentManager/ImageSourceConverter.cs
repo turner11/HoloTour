@@ -1,4 +1,5 @@
-﻿using HoloTour.Models;
+﻿using ContentManager.ViewModels;
+using HoloTour.Models;
 using HoloTour.ViewModels;
 using System;
 using System.Collections.Generic;

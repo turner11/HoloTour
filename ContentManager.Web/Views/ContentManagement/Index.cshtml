@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ContentManager.ViewModels
+@model IEnumerable<TourWpfViewModel>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,10 +13,16 @@
 
 <p>Hello from our Content View Template!</p>
 
-@foreach (var item in Model)
+@foreach (var tour in Model)
 {
     <div>
-        @item.Name
-        <hr />
+        <div>
+            <img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(tour.ImageBytes)))" alt="@tour.Name" />
+        </div>
+        <div>
+            @tour.Name
+        </div>
+
+
     </div>
 }

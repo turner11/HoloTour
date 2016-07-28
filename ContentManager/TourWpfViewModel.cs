@@ -7,12 +7,25 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace ContentManager
+namespace ContentManager.ViewModels
 {
     public class TourWpfViewModel : HoloTour.ViewModels.TourViewModel
     {
 
         public BitmapImage BitmapSource { get; }
+
+        public byte[] ImageBytes{get{ return this._tour.ImageBytes; }}
+
+        string _imageBytesAsStringCache;
+        public string ImageBytesAsString
+        {
+            get {
+                this._imageBytesAsStringCache = this._imageBytesAsStringCache ??
+                  Convert.ToBase64String(this.ImageBytes);
+                return this._imageBytesAsStringCache;
+                    }
+        }
+
 
 
         public TourWpfViewModel(HoloTour.ViewModels.ShallowTourViewModel other)

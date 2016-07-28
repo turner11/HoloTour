@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using HoloTour.Models;
 using System.Collections.ObjectModel;
 using HoloTour.ViewModels;
+using ContentManager.ViewModels;
 
 namespace ContentManager
 {
