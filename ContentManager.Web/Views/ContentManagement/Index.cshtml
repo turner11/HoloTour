@@ -13,16 +13,45 @@
 
 <p>Hello from our Content View Template!</p>
 
-@foreach (var tour in Model)
-{
-    <div>
-        <div>
-            <img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(tour.ImageBytes)))" alt="@tour.Name" />
-        </div>
-        <div>
-            @tour.Name
-        </div>
+<div class="slide" style="width:100%">
+    <ul class=”slideme“>
+        @foreach (var tour in Model)
+        {
+            <li><img src="http://buylaughs.com/wp-content/uploads/2014/01/Funny-Babies-Pictures-2.jpg" /></li>
+           @*<li><img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(tour.ImageBytes)))" alt="@tour.Name" /></li>*@
+                
+            
+                @*@tour.Name*@
+
+        }
+        </ul>
+</div>
 
 
-    </div>
+
+@*<div>
+   @Html.Partial("~/Views/View.cshtml", Model.First())
+</div>*@
+
+
+@section scripts {
+    <script type="text/javascript">
+    @*<script>*@
+        $(document).ready(function () {
+            jQuery(function ($) {
+                //debugger;
+                alert('2222222');
+                $('.slide').slideme({
+                    arrows: true,
+                    pagination: "numbers",
+                    resizable: {
+                        width: 990,
+                        height: 450,
+                    }
+                });
+            });
+        });
+
+        alert('111111');
+    </script>
 }
