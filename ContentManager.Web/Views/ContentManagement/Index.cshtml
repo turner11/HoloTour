@@ -13,18 +13,28 @@
 
 <p>Hello from our Content View Template!</p>
 
-<div id="toursSlide" style="width:100%">
-    <ul class=”slideme“>
+<div  class="blueberry" >
+    <ul class="slides">
         @foreach (var tour in Model)
         {
-            <li><img src="http://buylaughs.com/wp-content/uploads/2014/01/Funny-Babies-Pictures-2.jpg" /></li>
-           @*<li><img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(tour.ImageBytes)))" alt="@tour.Name" /></li>*@
-                
             
-                @*@tour.Name*@
+            <li><img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(tour.ImageBytes)))" alt="@tour.Name" /></li>
+            
+            @*@tour.Name*@
 
         }
         </ul>
+        <ul class="pager">
+            @foreach (var tour in Model)
+            {
+
+                <li><a href="#"><span>@tour.Name</span></a></li>
+
+                @*@tour.Name*@
+
+            }
+        </ul>
+
 </div>
 
 
@@ -40,15 +50,9 @@
         $(document).ready(function () {
             jQuery(function ($) {
                 //debugger;
+                //http://marktyrrell.com/labs/blueberry/
                 alert('2222222');
-                $('#toursSlide').slideme({
-                    arrows: true,
-                    pagination: "numbers",
-                    resizable: {
-                        width: 990,
-                        height: 450,
-                    }
-                });
+                $('.blueberry').blueberry();
             });
         });
 

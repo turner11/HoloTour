@@ -27,11 +27,11 @@ namespace ContentManager.Web
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/slideme2Js").Include(
-                     "~/Scripts/slideme2/jquery.slideme2.js"));
+            bundles.Add(new ScriptBundle("~/bundles/blueberryJs").Include(
+                     "~/Scripts/blueberry/jquery.blueberry.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/slideme2Css").Include(
-                   "~/Scripts/slideme2/slideme.css"));
+            bundles.Add(new StyleBundle("~/bundles/blueberryCss").Include(
+                   "~/Scripts/blueberry/blueberry.css"));
         }
     }
 }
