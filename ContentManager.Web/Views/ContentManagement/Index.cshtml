@@ -13,7 +13,7 @@
 
 <p>Hello from our Content View Template!</p>
 
-<div class="slide" style="width:100%">
+<div id="toursSlide" style="width:100%">
     <ul class=”slideme“>
         @foreach (var tour in Model)
         {
@@ -41,7 +41,7 @@
             jQuery(function ($) {
                 //debugger;
                 alert('2222222');
-                $('.slide').slideme({
+                $('#toursSlide').slideme({
                     arrows: true,
                     pagination: "numbers",
                     resizable: {
@@ -52,6 +52,6 @@
             });
         });
 
-        alert('111111');
+      
     </script>
 }
