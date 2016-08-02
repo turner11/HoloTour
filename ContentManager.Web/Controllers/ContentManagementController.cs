@@ -36,5 +36,15 @@ namespace ContentManager.Web.Controllers
         {
             return View(this._tours);
         }
+
+        // GET: ContentManagement
+        public ActionResult Tour(int tourId)
+        {
+            var tour = this._tours.FirstOrDefault(t=> t.Id == tourId);
+            if (tour != null)
+                return View(tour);
+
+            return View("Failed to find requested tour");
+        }
     }
 }

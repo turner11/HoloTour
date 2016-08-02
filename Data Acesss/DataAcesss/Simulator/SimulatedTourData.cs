@@ -14,6 +14,8 @@ namespace HoloTour.DataAcesss
     {
         abstract partial class SimulatedTourData
         {
+            static int _idCache;
+            static int IdGenerator { get { return ++_idCache; } }
             static List<SimulatedTourData> _tourDatas;
             static List<SimulatedTourData> TourDatas
             {
@@ -35,7 +37,7 @@ namespace HoloTour.DataAcesss
                     return _tourDatas;
                 }
             }
-
+            public int Id { get; }
             public string Name { get; }
             public byte[] ImageBytes { get; }
             public JObject[] PointsOfInterest { get; }
@@ -44,11 +46,12 @@ namespace HoloTour.DataAcesss
 
             public SimulatedTourData(string name, string imageBytes, string city, string caption)
             {
-                    this.Name = name;
-                    this.ImageBytes = Convert.FromBase64String(imageBytes);
-                    this.PointsOfInterest = this.GetPointOfInterest();
-                    this.City =city;
-                    this.Caption = caption;
+                this.Id = IdGenerator;
+                this.Name = name;
+                this.ImageBytes = Convert.FromBase64String(imageBytes);
+                this.PointsOfInterest = this.GetPointOfInterest();
+                this.City =city;
+                this.Caption = caption;
             }
 
             internal static List<PointOfInterestSimulatedData> GetAllpoiSimulatedData()
@@ -68,6 +71,7 @@ namespace HoloTour.DataAcesss
                 {
                     var Obj = new
                     {
+                        Id = tour.Id,
                         Name = tour.Name,
                         ImageBytes = tour.ImageBytes,
                         PointsOfInterest = tour.PointsOfInterest,

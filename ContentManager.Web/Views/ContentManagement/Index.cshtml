@@ -19,7 +19,8 @@
         @foreach (var tour in Model)
         {
             
-            <li><img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(tour.ImageBytes)))" alt="@tour.Name" /></li>
+            <li><img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(tour.ImageBytes)))" alt="@tour.Name" 
+                      onclick="location.href='@Url.Action("Tour", "ContentManagement",new { tourId = tour.Id })'"/></li>
             
             @*@tour.Name*@
 
@@ -40,9 +41,7 @@
 
 
 
-<div>
-   @Html.Partial("~/Views/View.cshtml", Model.First())
-</div>
+
 
 
 @section scripts {
@@ -52,7 +51,6 @@
             jQuery(function ($) {
                 //debugger;
                 //http://marktyrrell.com/labs/blueberry/
-                alert('2222222');
                 $('.blueberry').blueberry();
             });
         });

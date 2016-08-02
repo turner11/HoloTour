@@ -12,6 +12,8 @@ namespace HoloTour.ViewModels
     public class ShallowTourViewModel: ViewModelBase
     {
         protected TourModel _tour;
+
+        public int Id { get { return this._tour.Id; } }
         public string Name { get { return $"{this._tour.City.Title}, {this._tour.Name}"; } }
         public ReadOnlyCollection<PointOfInterestViewModel> PointsOfInterest { get; }
 

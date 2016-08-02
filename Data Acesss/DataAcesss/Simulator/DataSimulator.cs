@@ -23,8 +23,6 @@ namespace HoloTour.DataAcesss
         public override List<JObject> GetTours()
         {
             return SimulatedTourData.GetTours();
-           
-            
         }
 
       
