@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace HoloTour.ViewModels
 
             }
         }
+        //[UIHint("TourCaption")]
+        [DataType(DataType.MultilineText)]
         public string Caption { get { return this._tour.Caption; } }
 
         public ShallowTourViewModel(TourModel tour)

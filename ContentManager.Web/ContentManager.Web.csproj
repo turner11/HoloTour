@@ -277,9 +277,11 @@
     <Content Include="Views\ContentManagement\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\ContentManagement\Tour.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TourTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

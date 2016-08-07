@@ -1,0 +1,70 @@
+﻿@model ContentManager.ViewModels.TourWpfViewModel
+@using System.Collections.ObjectModel
+@using HoloTour.ViewModels
+@{
+    @*<div class="col-sm-4">*@
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TourModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+
+            <div class="container">
+                <div id="rowImage" class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <img src="data:image/png;base64,@(Html.Raw( Convert.ToBase64String(Model.ImageBytes)))" alt="@Model.Name" />
+
+                    </div>
+                </div>
+                <div id="rowName" class="row">
+                    <div class="col-md-5">
+                        <label> Tour Name:</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(tourVm => tourVm.Name) <br />
+                    </div>
+                </div>
+                <div id="rowCaption" class="row">
+                    <div class="col-md-5">
+                        <label> Caption:</label>
+                    </div>
+
+                    <div class="col-md-7">
+                        @Html.EditorFor(tourVm => tourVm.Caption)<br />
+                    </div>
+                </div>
+                <div id="rowPoiheader" class="row">
+
+                    <div class="col-md-12">
+                        <label> Points of Interest:</label>
+                    </div>
+                </div>
+                <div id="rowPoi" class="row">
+                    <div class="col-md-3">
+                        <ul>
+                           
+                            @for (int i = 0; i < Model.PointsOfInterest.Count; i++)
+                            {
+                                PointOfInterestViewModel poi = Model.PointsOfInterest[i];
+                                <li>@poi.Title</li>                                
+                            }
+                         
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    @*@Html.EditorFor(model => model.PointsOfInterest)*@
+}

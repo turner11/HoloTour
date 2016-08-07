@@ -43,7 +43,7 @@ namespace ContentManager.Web.Controllers
             var tour = this._tours.FirstOrDefault(t=> t.Id == tourId);
             if (tour != null)
                 return View(tour);
-
+           
             return View("Failed to find requested tour");
         }
     }

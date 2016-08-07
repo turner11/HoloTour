@@ -4,6 +4,4 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    @Html.Partial("~/Views/Shared/View.cshtml", Model)
-</div>
+@Html.EditorFor(tour=> tour, templateName: (string)"TourTemplate")

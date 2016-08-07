@@ -26,7 +26,7 @@ namespace HoloTour.ViewModels
         }
 
         GuideViewModel _guide;
-        internal GuideViewModel Guide
+        public GuideViewModel Guide
         {
             get
             {
