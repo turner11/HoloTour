@@ -20,10 +20,11 @@ namespace HoloTour.ViewModels
         {
             get
             {
-                return ViewModelBase.BytesToImage(this._pointOfInterestModel.ImageBytes);
+                return ViewModelBase.BytesToImage(this.ImageBytes);
 
             }
         }
+        public byte[] ImageBytes { get { return this._pointOfInterestModel.ImageBytes; } }
 
         GuideViewModel _guide;
         public GuideViewModel Guide

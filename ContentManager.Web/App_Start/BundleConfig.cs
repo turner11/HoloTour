@@ -27,11 +27,20 @@ namespace ContentManager.Web
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/JqueryUIcss").Include(
+                     "~/Content/themes/base/jquery-ui.css",
+                     "~/Content/site.css"));
+
+            
+
             bundles.Add(new ScriptBundle("~/bundles/blueberryJs").Include(
                      "~/Scripts/blueberry/jquery.blueberry.js"));
 
             bundles.Add(new StyleBundle("~/bundles/blueberryCss").Include(
                    "~/Scripts/blueberry/blueberry.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryUI").Include(
+                       "~/Scripts/jquery-ui-{version}.js"));
         }
     }
 }
