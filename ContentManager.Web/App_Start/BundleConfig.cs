@@ -31,7 +31,11 @@ namespace ContentManager.Web
                      "~/Content/themes/base/jquery-ui.css",
                      "~/Content/site.css"));
 
-            
+            bundles.Add(new StyleBundle("~/Content/equal-height-columns").Include(
+                   "~/Content/equal-height-columns.css"));
+
+            bundles.Add(new StyleBundle("~/Content/editorStyles").Include(
+                "~/Content/editorStyles.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/blueberryJs").Include(
                      "~/Scripts/blueberry/jquery.blueberry.js"));

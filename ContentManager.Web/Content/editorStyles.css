@@ -1,0 +1,12 @@
+
+
+.fillParent {
+    height: 100%;
+    width: 100%;
+    max-height:none;
+    max-width:none;
+}
+
+.longText{
+    min-height:200px;
+}

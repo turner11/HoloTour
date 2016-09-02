@@ -2,7 +2,7 @@
 @using System.Collections.ObjectModel
 @using HoloTour.ViewModels
 @{
-    @*<div class="col-sm-4">*@
+   
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -23,7 +23,7 @@
                         <label> Tour Name:</label>
                     </div>
                     <div class="col-md-10">
-                        @Html.EditorFor(tourVm => tourVm.Name) <br />
+                        @Html.TextBoxFor(tourVm => tourVm.Name, new { @class = "fillParent" }) <br />
                     </div>
                 </div>
                 <div id="rowCaption" class="row">
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="col-md-10">
-                        @Html.EditorFor(tourVm => tourVm.Caption)<br />
+                        @Html.TextBoxFor(tourVm => tourVm.Caption, new { @class = "fillParent" })<br />
                     </div>
                 </div>
                 <div id="rowPoiheader" class="row">
@@ -42,92 +42,20 @@
                     </div>
                 </div>
                 <div id="rowPoi" class="row">
-                    <div class="col-md-12">
-                        <div id="poisAccordion">
-
-    @*@Html.EditorFor(model => model.PointsOfInterest)*@
-
-                            @for (int i = 0; i < Model.PointsOfInterest.Count; i++)
-                            {
-
-                                PointOfInterestViewModel poi = Model.PointsOfInterest[i];
-                                <div>
-                                    <h3>@poi.Title</h3>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img  style="max-width:100%;max-height:100%;" 
-                                                  src="data:image/png;base64,@(Html.Raw(Convert.ToBase64String(poi.ImageBytes)))" 
-                                                  alt="@poi.Title" />
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>
-                                                    @poi.Guide.Text
-                                                </p>
-                                            </div>
-                                        </div>
-                                </div>
-                                @*<li class="ui-state-default">@poi.Title</li>*@
-                            }
-
-                        </div>
+                    @Html.EditorFor(tour => Model.PointsOfInterest, templateName: (string)"PointsOfInterestTemplate")
+    
                     </div>
-                  
-
-
-                </div>
-
 
             </div>
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-2">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 
-    @Html.Script(
+    @*@Html.Script(
         @<script type="text/javascript"> 
-          
-            $(document).ready(function () {         
-                var icons = {
-                    header: "ui-icon-circle-arrow-e",
-                    activeHeader: "ui-icon-circle-arrow-s"
-                };
-                var accordion = $('#poisAccordion');
-                accordion.accordion({
-                    collapsible: true,
-                    active: false, //collapse all
-                    icons: icons,
-                    heightStyle: "content",
-                     header: '> div > h3',
-                    autoHeight: false
-                })
-               .sortable({
-                    axis: "y",
-                    handle: "h3",
-                    stop: function (event, ui) {
-                        // IE doesn't register the blur when sorting
-                        // so trigger focusout handlers to remove .ui-state-focus
-                        ui.item.children("h3").triggerHandler("focusout");
-
-                        // Refresh accordion to handle new order
-                        $(this).accordion("refresh");
-                    }
-                });
-
-                $("#toggle").button().on("click", function () {
-                    if ($("#accordion").accordion("option", "icons")) {
-                        $("#accordion").accordion("option", "icons", null);
-                    } else {
-                        $("#accordion").accordion("option", "icons", icons);
-                    }
-                });
-
-                accordion.collapse();
-        
-        });
-
-
         </script>
    
-    )
+    )*@
 }
