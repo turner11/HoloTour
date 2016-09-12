@@ -54,8 +54,8 @@ namespace ContentManager.Web.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult SaveTour(TourWpfViewModel tour)
         {
-
-            return "Posted";//View("Posted");
+            var a = tour.Name.ToString();
+            return Content(a);//View("Posted");
             
         }
     }
