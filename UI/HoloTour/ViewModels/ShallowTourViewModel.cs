@@ -14,8 +14,8 @@ namespace HoloTour.ViewModels
     {
         protected TourModel _tour;
 
-        public int Id { get { return this._tour.Id; } }
-        public string Name { get { return $"{this._tour.City.Title}, {this._tour.Name}"; } }
+        public int Id { get { return this._tour?.Id ?? -1; } }
+        public string Name { get { return $"{this._tour?.City.Title}, {this._tour?.Name}"; } }
         public ReadOnlyCollection<PointOfInterestViewModel> PointsOfInterest { get; }
 
      
@@ -29,13 +29,14 @@ namespace HoloTour.ViewModels
         }
         //[UIHint("TourCaption")]
         [DataType(DataType.MultilineText)]
-        public string Caption { get { return this._tour.Caption; } }
+        public string Caption { get { return this._tour?.Caption; } }
 
         public ShallowTourViewModel(TourModel tour)
         {
             this._tour = tour;
-            var pois = this._tour.PointsOfInterest.Select(p=> new PointOfInterestViewModel(p)).ToList();
-            this.PointsOfInterest = new ReadOnlyCollection<PointOfInterestViewModel>(pois);
+            var pois = this._tour?.PointsOfInterest.Select(p=> new PointOfInterestViewModel(p)).ToList();
+            this.PointsOfInterest = 
+                new ReadOnlyCollection<PointOfInterestViewModel>(pois ?? new List<PointOfInterestViewModel>());
 
         }
 

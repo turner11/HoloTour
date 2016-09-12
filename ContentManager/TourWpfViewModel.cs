@@ -28,7 +28,10 @@ namespace ContentManager.ViewModels
                     }
         }
 
+        public TourWpfViewModel():this(null as TourModel)
+        {
 
+        }
 
         public TourWpfViewModel(HoloTour.ViewModels.ShallowTourViewModel other)
             : this((TourModel)other)
@@ -37,14 +40,16 @@ namespace ContentManager.ViewModels
         }
         public TourWpfViewModel(TourModel tour) : base(tour)
         {
-            var bytes = this._tour.ImageBytes;
-
-            var byteStream = new System.IO.MemoryStream(bytes);
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = byteStream;
-            image.EndInit();
-            this.BitmapSource = image;// BitmapSource.Create(2, 2, 300, 300, PixelFormats.Indexed8, BitmapPalettes.Gray256, byteArrayIn, 2);
+            var bytes = this._tour?.ImageBytes;
+            if (bytes != null)
+            {
+                var byteStream = new System.IO.MemoryStream(bytes);
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = byteStream;
+                image.EndInit();
+                this.BitmapSource = image;// BitmapSource.Create(2, 2, 300, 300, PixelFormats.Indexed8, BitmapPalettes.Gray256, byteArrayIn, 2);
+            }
 
 
         }

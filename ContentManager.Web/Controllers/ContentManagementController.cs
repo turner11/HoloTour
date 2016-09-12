@@ -17,10 +17,10 @@ namespace ContentManager.Web.Controllers
             get
             {
                 var ret = this.Session[SessionKey_Tours] as TourWpfViewModel[];
-                
+
                 if (ret == null)
                 {
-                    ret = 
+                    ret =
                     this.ContentService.GetTours().Select(t => new TourWpfViewModel(t)).ToArray();
                     this.Session[SessionKey_Tours] = ret;
                 }
@@ -28,8 +28,8 @@ namespace ContentManager.Web.Controllers
             }
         }
         public ContentManagementController()
-        {   
-           
+        {
+
         }
         // GET: ContentManagement
         public ActionResult Index()
@@ -40,11 +40,23 @@ namespace ContentManager.Web.Controllers
         // GET: ContentManagement
         public ActionResult Tour(int tourId)
         {
-            var tour = this._tours.FirstOrDefault(t=> t.Id == tourId);
+            var tour = this._tours.FirstOrDefault(t => t.Id == tourId);
             if (tour != null)
                 return View(tour);
-           
+
             return View("Failed to find requested tour");
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public ActionResult SaveTour(TourWpfViewModel tour)
+        {
+
+            return "Posted";//View("Posted");
+            
         }
     }
 }
