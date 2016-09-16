@@ -14,11 +14,15 @@ namespace HoloTour.ViewModels
     {
         protected TourModel _tour;
 
-
+<<<<<<< HEAD
         public virtual int Id { get { return this._tour.Id; } }
         public virtual string Name { get { return $"{this._tour.City.Title}, {this._tour.Name}"; } }
         public virtual ReadOnlyCollection<PointOfInterestViewModel> PointsOfInterest { get; }
-
+=======
+        public int Id { get { return this._tour?.Id ?? -1; } }
+        public string Name { get { return $"{this._tour?.City.Title}, {this._tour?.Name}"; } }
+        public ReadOnlyCollection<PointOfInterestViewModel> PointsOfInterest { get; }
+>>>>>>> origin/master
 
 
         public virtual ImageSource ImageAsImageSource
@@ -31,9 +35,11 @@ namespace HoloTour.ViewModels
         }
         //[UIHint("TourCaption")]
         [DataType(DataType.MultilineText)]
-
+<<<<<<< HEAD
         public virtual string Caption { get { return this._tour.Caption; } }
-
+=======
+        public string Caption { get { return this._tour?.Caption; } }
+>>>>>>> origin/master
 
         public ShallowTourViewModel(TourModel tour)
         {

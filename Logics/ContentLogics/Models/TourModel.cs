@@ -12,6 +12,8 @@ namespace HoloTour.Models
 {
     public class TourModel
     {
+
+        public static readonly TourModel NullObject = new TourModel(-1, "", new byte[0], new PointOfInterestModel[0], "", "");
         public int Id { get;  }
         public string Name { get;  }
 

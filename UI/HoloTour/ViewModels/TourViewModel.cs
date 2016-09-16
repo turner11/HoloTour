@@ -12,7 +12,7 @@ namespace HoloTour.ViewModels
         
         public TourViewModel(TourModel tour) :base(tour)
         {
-            this._tour.Initialize();
+            this._tour?.Initialize();
         }
 
       

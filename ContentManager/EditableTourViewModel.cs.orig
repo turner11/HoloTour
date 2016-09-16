@@ -37,9 +37,10 @@ namespace ContentManager.ViewModels
             }
         }
 
-        
+        public TourWpfViewModel():this(null as TourModel)
+        {
 
-
+<<<<<<< HEAD:ContentManager/EditableTourViewModel.cs
         string _caption;
         public new string Caption
         {
@@ -54,12 +55,9 @@ namespace ContentManager.ViewModels
             set { this._name = value; }
         }
 
-
-
-        public EditableTourViewModel():this(TourModel.NullObject)
-        {
-
+=======
         }
+>>>>>>> origin/master:ContentManager/TourWpfViewModel.cs
 
         public EditableTourViewModel(HoloTour.ViewModels.ShallowTourViewModel other)
             : this((TourModel)other)
@@ -69,7 +67,7 @@ namespace ContentManager.ViewModels
         public EditableTourViewModel(TourModel tour) : base(tour)
         {
             var bytes = this._tour?.ImageBytes;
-            if (bytes?.Length >0 )
+            if (bytes != null)
             {
                 var byteStream = new System.IO.MemoryStream(bytes);
                 BitmapImage image = new BitmapImage();
@@ -79,17 +77,6 @@ namespace ContentManager.ViewModels
                 this.BitmapSource = image;// BitmapSource.Create(2, 2, 300, 300, PixelFormats.Indexed8, BitmapPalettes.Gray256, byteArrayIn, 2);
             }
 
-
-        }
-
-        public override string ToString()
-        {
-            var str = this.Name;
-#if DEBUG
-            var jObj = Newtonsoft.Json.Linq.JObject.FromObject(this);
-            str = jObj.ToString();
-#endif
-            return str;
 
         }
 

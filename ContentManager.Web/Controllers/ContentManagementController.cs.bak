@@ -16,12 +16,21 @@ namespace ContentManager.Web.Controllers
         {
             get
             {
+<<<<<<< HEAD
                 var ret = this.Session[SessionKey_Tours] as EditableTourViewModel[];
+                
+                if (ret == null)
+                {
+                    ret = 
+                    this.ContentService.GetTours().Select(t => new EditableTourViewModel(t)).ToArray();
+=======
+                var ret = this.Session[SessionKey_Tours] as TourWpfViewModel[];
 
                 if (ret == null)
                 {
                     ret =
-                    this.ContentService.GetTours().Select(t => new EditableTourViewModel(t)).ToArray();
+                    this.ContentService.GetTours().Select(t => new TourWpfViewModel(t)).ToArray();
+>>>>>>> origin/master
                     this.Session[SessionKey_Tours] = ret;
                 }
                 return ret;
@@ -54,7 +63,7 @@ namespace ContentManager.Web.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult SaveTour(EditableTourViewModel tour)
         {
-            var a = tour.ToString();
+            var a = tour.Name.ToString();
             return Content(a);//View("Posted");
             
         }

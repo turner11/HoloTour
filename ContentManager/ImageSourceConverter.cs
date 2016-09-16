@@ -32,7 +32,7 @@ namespace ContentManager
             bool isvalid = targetType == typeof(TourViewModel);
             if (!isvalid)
             {
-                throw new ArgumentException("The converter handles only TourWpfViewModel - TourViewModel conversions");
+                throw new ArgumentException($"The converter handles only {nameof(EditableTourViewModel)} - {nameof(EditableTourViewModel)} conversions");
             }
             var vm = value as ShallowTourViewModel;
             var model =  (TourModel)vm;
