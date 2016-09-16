@@ -12,16 +12,16 @@ namespace ContentManager.Web.Controllers
     public class ContentManagementController : ContentController
     {
 
-        TourWpfViewModel[] _tours
+        EditableTourViewModel[] _tours
         {
             get
             {
-                var ret = this.Session[SessionKey_Tours] as TourWpfViewModel[];
+                var ret = this.Session[SessionKey_Tours] as EditableTourViewModel[];
                 
                 if (ret == null)
                 {
                     ret = 
-                    this.ContentService.GetTours().Select(t => new TourWpfViewModel(t)).ToArray();
+                    this.ContentService.GetTours().Select(t => new EditableTourViewModel(t)).ToArray();
                     this.Session[SessionKey_Tours] = ret;
                 }
                 return ret;

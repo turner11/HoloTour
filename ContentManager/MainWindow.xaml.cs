@@ -25,14 +25,14 @@ namespace ContentManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<TourWpfViewModel> Tours { get; }
+        public ObservableCollection<EditableTourViewModel> Tours { get; }
         public ObservableCollection<PointOfInterestViewModel> Pois { get; }
         ContentService _contentService;
         public MainWindow()
         {
             this._contentService = ContentService.Factory();
-            var tours = this._contentService.GetTours().Select(t => new TourWpfViewModel(t)).ToArray();
-            this.Tours = new ObservableCollection<TourWpfViewModel>(tours);
+            var tours = this._contentService.GetTours().Select(t => new EditableTourViewModel(t)).ToArray();
+            this.Tours = new ObservableCollection<EditableTourViewModel>(tours);
             this.Pois = new ObservableCollection<PointOfInterestViewModel>();
             
             InitializeComponent();

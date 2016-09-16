@@ -7,35 +7,58 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using HoloTour.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace ContentManager.ViewModels
 {
     
-    public class TourWpfViewModel : HoloTour.ViewModels.TourViewModel
+    public class EditableTourViewModel : HoloTour.ViewModels.TourViewModel
     {
 
         public BitmapImage BitmapSource { get; }
 
-        public byte[] ImageBytes{get{ return this._tour.ImageBytes; }}
-
+        private byte[] _imageBytesCache;
+        public byte[] ImageBytes{get{ return this._imageBytesCache ?? this._tour.ImageBytes; }}
+        
         string _imageBytesAsStringCache;
         public string ImageBytesAsString
         {
-            get {
+            get
+            {
                 this._imageBytesAsStringCache = this._imageBytesAsStringCache ??
                   Convert.ToBase64String(this.ImageBytes);
                 return this._imageBytesAsStringCache;
-                    }
+            }
+            set
+            {
+                this._imageBytesAsStringCache = null;
+                this._imageBytesCache = Convert.FromBase64String(value);
+            }
         }
 
 
+        string _caption;
+        public new string Caption
+        {
+            get{return _caption ?? base.Caption;}
+            set {this._caption = value; }
+        }
 
-        public TourWpfViewModel(HoloTour.ViewModels.ShallowTourViewModel other)
+        string _name;
+        public new string Name
+        {
+            get{return this._name ?? base.Name;}
+            set { this._name = value; }
+        }
+
+
+        public EditableTourViewModel(HoloTour.ViewModels.ShallowTourViewModel other)
             : this((TourModel)other)
         {
 
         }
-        public TourWpfViewModel(TourModel tour) : base(tour)
+        public EditableTourViewModel(TourModel tour) : base(tour)
         {
             var bytes = this._tour.ImageBytes;
 
