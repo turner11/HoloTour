@@ -15,6 +15,8 @@ using Xamarin.Forms.Platform.Android;
 using HoloTour.Controls;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
+using Xamarin.Forms.Maps;
+
 [assembly: ExportRenderer(typeof(MapWithRoute), typeof(HoloTour.Droid.CustomRenderes.MapWithRouteRenderer))]
 namespace HoloTour.Droid.CustomRenderes
 {
@@ -23,9 +25,9 @@ namespace HoloTour.Droid.CustomRenderes
         Android.Gms.Maps.GoogleMap map;
         List<Xamarin.Forms.Maps.Position> routeCoordinates;
 
-      
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.View> e)       
+       //protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.View> e)       
+        protected override void OnElementChanged(ElementChangedEventArgs<Map> e)
         {
             base.OnElementChanged(e);
 

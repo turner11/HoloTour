@@ -8,26 +8,28 @@ using Xamarin.Forms;
 
 namespace HoloTour.ViewModels
 {
-    public class PointOfInterestViewModel: ViewModelBase, Common.Interfaces.IPointOfInterest
+    public class PointOfInterestViewModel: ViewModelBase<PointOfInterestModel>, Common.Interfaces.IPointOfInterest
     {
+
+        public static readonly PointOfInterestViewModel NullObject = new PointOfInterestViewModel(new PointOfInterestModel(-1,"",new double[] {0,0},null as byte[]));
         PointOfInterestModel _pointOfInterestModel { get; }
 
-        public int Id { get { return this._pointOfInterestModel.Id; } }
-        public string Title { get { return this._pointOfInterestModel.Title; } }
-        public Xamarin.Forms.Maps.Position Position { get { return this._pointOfInterestModel.Position; } }
+        public virtual int Id { get { return this._pointOfInterestModel.Id; } }
+        public virtual string Title { get { return this._pointOfInterestModel.Title; } }
+        public virtual Xamarin.Forms.Maps.Position Position { get { return this._pointOfInterestModel.Position; } }
 
-        public ImageSource ImageAsImageSource
+        public virtual ImageSource ImageAsImageSource
         {
             get
             {
-                return ViewModelBase.BytesToImage(this.ImageBytes);
+                return ViewModelBase<PointOfInterestModel>.BytesToImage(this.ImageBytes);
 
             }
         }
-        public byte[] ImageBytes { get { return this._pointOfInterestModel.ImageBytes; } }
+        public virtual byte[] ImageBytes { get { return this._pointOfInterestModel.ImageBytes; } }
 
         GuideViewModel _guide;
-        public GuideViewModel Guide
+        public virtual GuideViewModel Guide
         {
             get
             {
@@ -42,10 +44,18 @@ namespace HoloTour.ViewModels
 
     
 
-        public PointOfInterestViewModel(PointOfInterestModel poi)
+        public PointOfInterestViewModel(PointOfInterestModel poi) : base(poi)
+
         {
             this._pointOfInterestModel = poi;
             
         }
+
+        public override int GetHashCode()
+        {
+            return this.Id;
+        }
+
+        
     }
 }

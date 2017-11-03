@@ -7,7 +7,7 @@ using Xamarin.Forms.Maps;
 
 namespace HoloTour.Models
 {
-    public class Guide
+    public class Guide: ContentLogics.Models.ModelBase
     {
         public int PointOfInterestId { get; }
         public string PointOfInterestTitle { get; }

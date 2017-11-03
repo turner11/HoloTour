@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HoloTour.Models
 {
-    public class PointOfInterestModel: IPointOfInterest
+    public class PointOfInterestModel: ContentLogics.Models.ModelBase, IPointOfInterest
     {
         readonly ContentService _contentService;
         /// <summary>
@@ -34,9 +34,12 @@ namespace HoloTour.Models
         public Guide Guide { get; private set; }
 
         public PointOfInterestModel(JObject jsonObject)
+            :this(jsonObject.Value<int>("Id"), jsonObject.Value<string>("Title"), 
+                 jsonObject.GetValue("Position").Cast<JValue>().Where(obj => obj.Value is double).Select(obj => (double)obj.Value).ToArray(),
+                jsonObject.GetValue("imageBytes").Value<string>())
         {
 
-            this._contentService = ContentService.Factory();
+           
             /*
              * Cannot deserialize the current JSON array (e.g. [1,2,3]) into type 'Xamarin.Forms.Maps.Position' 
              * because the type requires a JSON object (e.g. {"name":"value"}) to deserialize correctly.
@@ -48,25 +51,34 @@ Path 'Position', line 4, position 15.
              */
 
             //var jsonObject = Newtonsoft.Json.Linq.JObject.Parse(jsonString);
-            this.Id = jsonObject.Value<int>("Id");
-            this.Title = jsonObject.Value<string>("Title");
-            
+            var id = jsonObject.Value<int>("Id");
+            var title = jsonObject.Value<string>("Title");
+
             var posArray = jsonObject.GetValue("Position").ToArray();
             var coordinates = posArray.Cast<JValue>().Where(obj => obj.Value is double).Select(obj => (double)obj.Value).ToArray();
-            Debug.Assert(coordinates.Length == 2, "Gpt wrong number of coordinates");
+         
+        }
+
+        public PointOfInterestModel(int id, string title, double[] coordinates, string base64String)
+            :this(id,title,coordinates,Convert.FromBase64String(base64String))
+        {
+
+        }
+        public PointOfInterestModel(int id, string title, double[] coordinates, byte[] imageBytes)
+        {
+            this._contentService = ContentService.Factory();
+            this.Id = id;
+            this.Title = title;
+
+            Debug.Assert(coordinates.Length == 2, "Got wrong number of coordinates");
 
 
             var latitude = coordinates[0];
             var longitude = coordinates[1];
-            this.Position = new Xamarin.Forms.Maps.Position(latitude,longitude);
+            this.Position = new Xamarin.Forms.Maps.Position(latitude, longitude);
 
-            var imageAsString = jsonObject.GetValue("imageBytes").Value<string>();
-            var imageBytes = Convert.FromBase64String(imageAsString);
             //TODO: add image...
             this.ImageBytes = imageBytes ?? new byte[0];
-
-
-
         }
 
         internal void Initialize()

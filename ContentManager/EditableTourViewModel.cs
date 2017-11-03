@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 
 namespace ContentManager.ViewModels
 {
-    
+    [System.Web.Mvc.Bind(Include = "EditablePointsOfInterest")]
     public class EditableTourViewModel : HoloTour.ViewModels.TourViewModel
     {
 
@@ -37,7 +37,10 @@ namespace ContentManager.ViewModels
             }
         }
 
-        
+        public List<EditablePointOfInterestViewModel> EditablePointsOfInterest { get; set; }
+        public override ReadOnlyCollection<PointOfInterestViewModel> PointsOfInterest { get { return this.EditablePointsOfInterest?.Cast<PointOfInterestViewModel>().ToList().AsReadOnly(); }
+        protected set { this.EditablePointsOfInterest = value.Select(p => new EditablePointOfInterestViewModel(p)).ToList(); }
+        }
 
 
         string _caption;
@@ -64,7 +67,7 @@ namespace ContentManager.ViewModels
         public EditableTourViewModel(HoloTour.ViewModels.ShallowTourViewModel other)
             : this((TourModel)other)
         {
-
+            
         }
         public EditableTourViewModel(TourModel tour) : base(tour)
         {
@@ -86,8 +89,14 @@ namespace ContentManager.ViewModels
         {
             var str = this.Name;
 #if DEBUG
-            var jObj = Newtonsoft.Json.Linq.JObject.FromObject(this);
-            str = jObj.ToString();
+            str = "";
+            var pi = this.GetType().GetProperties();
+            foreach (var p in pi)
+            {
+                str += $"{p.Name}: {p.GetValue(this)}\n";
+            }
+            //var jObj = Newtonsoft.Json.Linq.JObject.FromObject(this);
+            //str = jObj.ToString();
 #endif
             return str;
 

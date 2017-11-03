@@ -29,8 +29,13 @@ namespace ContentManager.Web.Controllers
 
         public ActionResult EditContent()
         {
-
             return RedirectToAction("Index", "ContentManagement");
+            //return RedirectToAction("../ContentManagement/Index");
+        }
+
+        public ActionResult EditPois()
+        {
+            return RedirectToAction("PointofInterest", "ContentManagement");
             //return RedirectToAction("../ContentManagement/Index");
         }
     }

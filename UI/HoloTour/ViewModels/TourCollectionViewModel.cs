@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace HoloTour.ViewModels
 {
-    class TourCollectionViewModel: ViewModelBase
+    class TourCollectionViewModel: ViewModelBase<ToursModel>
     {
+        
         ToursModel _toursModel;
 
         public ReadOnlyCollection<ShallowTourViewModel> Tours { get; }
 
-        public TourCollectionViewModel(ToursModel toursModel)
+        public TourCollectionViewModel(ToursModel toursModel):base(toursModel)
+
         {
 
             this._toursModel = toursModel;

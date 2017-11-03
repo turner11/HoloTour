@@ -2,7 +2,7 @@
 @using System.Collections.ObjectModel
 @using HoloTour.ViewModels
 @{
-   
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -42,18 +42,40 @@
                     </div>
                 </div>
                 <div id="rowPoi" class="row">
-                    @Html.EditorFor(tour => Model.PointsOfInterest, templateName: (string)"PointsOfInterestTemplate")
-    
-                    </div>
+
+                    @Html.EditorFor(tour => tour.EditablePointsOfInterest, templateName: (string)"PointsOfInterestTemplate")
+                    @{
+
+
+                        for (int i = 0; i < Model.EditablePointsOfInterest.Count; i++)
+                        {
+                            var poi = Model.EditablePointsOfInterest[0];
+                            Html.HiddenFor(model => Model.EditablePointsOfInterest[i]);
+
+
+                            //Html.HiddenFor(model => Model.EditablePointsOfInterest[i].Guide.Text);
+                            //Html.HiddenFor(model => Model.EditablePointsOfInterest[i].Title);
+                            //Html.HiddenFor(model => Model.EditablePointsOfInterest[i].Id, new { id = Model.EditablePointsOfInterest[i].Id });
+
+                            //var id = Model.EditablePointsvar an = new {id = poi.Id };
+                            //Model.EditablePointsOfInterest[i].Id > 1
+                            //new { id = Model.EditablePointsOfInterest[i].Id }
+                            // Html.CheckBoxFor(model => Model.EditablePointsOfInterest[i].Id > 1);
+
+                            <label>@Model.EditablePointsOfInterest[i].Title</label>
+                            @*<input type="hidden" name="EditablePointsOfInterest" />*@
+                        }
+                    }
+                </div>
 
             </div>
-            
+
         </div>
     </div>
 
     @*@Html.Script(
-        @<script type="text/javascript"> 
-        </script>
-   
-    )*@
+            @<script type="text/javascript">
+            </script>
+
+        )*@
 }

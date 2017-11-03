@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace HoloTour.Models
 {
-    public class TourModel
+    public class TourModel: ContentLogics.Models.ModelBase
     {
 
         public static readonly TourModel NullObject = new TourModel(-1, "", new byte[0], new PointOfInterestModel[0], "", "");

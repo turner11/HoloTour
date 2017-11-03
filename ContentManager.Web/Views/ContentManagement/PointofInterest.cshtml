@@ -1,0 +1,17 @@
+﻿@using ContentManager.ViewModels
+@using System.Collections.ObjectModel
+@using HoloTour.ViewModels
+@model IList<EditablePointOfInterestViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("SavePoi", "ContentManagement", FormMethod.Post))
+{
+    @Html.EditorFor(poi => poi, templateName: (string)"PointsOfInterestTemplate")
+
+    <div class="col-md-2">
+        <input type="submit" value="Save" class="btn btn-default"  />
+
+        @*onclick="location.href='@Url.Action("SaveTour", controllerName: "ContentManagement")'"*@
+    </div>
+}

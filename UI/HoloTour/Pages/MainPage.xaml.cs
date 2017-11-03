@@ -70,7 +70,7 @@ namespace HoloTour.Pages
                 var locator = CrossGeolocator.Current;
                 locator.DesiredAccuracy = 50;
 
-                var position = await locator.GetPositionAsync(timeoutMilliseconds: 15000);
+                var position = await locator.GetPositionAsync(timeout: TimeSpan.FromSeconds(1.5));
 
                 Debug.WriteLine("Position Status: {0}", position.Timestamp);
                 Debug.WriteLine("Position Latitude: {0}", position.Latitude);

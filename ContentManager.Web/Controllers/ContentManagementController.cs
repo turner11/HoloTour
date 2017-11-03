@@ -27,6 +27,20 @@ namespace ContentManager.Web.Controllers
                 return ret;
             }
         }
+
+
+        EditablePointOfInterestViewModel[] _pois
+        {
+            get
+            {
+                var tours = this._tours;
+                var pois = tours.SelectMany(t => t.PointsOfInterest).Distinct()
+                    .Select(p=> new EditablePointOfInterestViewModel(p))
+                    .ToArray();
+                return pois;
+            }
+
+        }
         public ContentManagementController()
         {
 
@@ -38,25 +52,50 @@ namespace ContentManager.Web.Controllers
         }
 
         // GET: ContentManagement
+      
         public ActionResult Tour(int tourId)
         {
             var tour = this._tours.FirstOrDefault(t => t.Id == tourId);
+            return Tour(tour);
+        }
+
+        private ActionResult Tour(EditableTourViewModel tour)
+        {
             if (tour != null)
                 return View(tour);
 
             return View("Failed to find requested tour");
         }
 
+
+        public ActionResult PointofInterest()
+        {
+            var p = _pois;
+            return View(p);
+        }
+        
+
         //
         // POST: /Account/Login
         [HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public ActionResult SaveTour(EditableTourViewModel tour)
+        public ActionResult SaveTour(EditableTourViewModel editableTourViewModel)
         {
-            var a = tour.ToString();
+            var a = editableTourViewModel.ToString();
             return Content(a);//View("Posted");
             
+        }
+
+
+        [HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public ActionResult SavePoi(IList<EditablePointOfInterestViewModel> pois)
+        {
+            var a = pois.ToString();
+            return Content(a);//View("Posted");
+
         }
     }
 }

@@ -51,7 +51,7 @@ namespace HoloTour.Pages
 
             this._geolocator.DesiredAccuracy = 20;
             this._geolocator.PositionChanged += Geolocator_PositionChanged;
-            int minTime = (int)TimeSpan.FromSeconds(15).TotalMilliseconds;
+            TimeSpan minTime = TimeSpan.FromSeconds(15);
             double minDistance = 20;
             try
             {

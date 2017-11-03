@@ -16,6 +16,7 @@ namespace HoloTour.Pages
         public MainTourPage(TourViewModel viewModel)
         {
             InitializeComponent();
+            System.Diagnostics.Debug.WriteLine("@@@@@@@@@@@@ WE ARE HERE! @@@@@@@@@@@@@@@@");
             
             this.masterPage = new TourOverviewPage(viewModel);
             this.masterPage.Title = this.masterPage.Title ?? viewModel.Caption;
