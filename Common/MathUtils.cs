@@ -1,4 +1,4 @@
-﻿using CoreLocation;
+﻿//using CoreLocation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
